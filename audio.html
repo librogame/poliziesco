@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controllo Audio - Poliziesco Treno</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #2c3e50; /* Grigio blu scuro, stile elegante e misterioso */
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white; /* Testo bianco per contrasto */
+        }
+
+        .track-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+
+        .track-container h2 {
+            margin-right: 15px;
+            font-size: 28px;
+            color: #f39c12; /* Colore oro per i titoli, simbolo di lusso e mistero */
+        }
+
+        .track-container button {
+            width: 70px;
+            height: 70px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #34495e, #2c3e50); /* Gradiente grigio/blu scuro per il bottone */
+            border: 3px solid #f39c12; /* Bordo oro scuro per il bottone */
+            color: #f39c12; /* Simbolo Play/Pause oro scuro */
+            font-size: 35px; /* Simboli più grandi */
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.4), -3px -3px 15px rgba(255, 255, 255, 0.1); /* Ombra leggera ma elegante */
+        }
+
+        .track-container button:hover {
+            transform: scale(1.1); /* Ingrandisce il bottone al passaggio del mouse */
+            box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.6), -5px -5px 20px rgba(255, 255, 255, 0.2); /* Ombra più intensa */
+        }
+
+        .track-container button:active {
+            transform: scale(1); /* Ritorna alla dimensione normale quando viene cliccato */
+            box-shadow: inset 2px 2px 8px rgba(0, 0, 0, 0.4); /* Ombra interna quando il bottone è premuto */
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Intro -->
+    <div class="track-container">
+        <h2>Intro</h2>
+        <button onclick="toggleAudio('intro', this)">&#9654;</button> <!-- Play -->
+    </div>
+    <audio id="intro" src="intro.mp3" preload="auto"></audio>
+
+    <!-- Scena 1 -->
+    <div class="track-container">
+        <h2>Scena 1</h2>
+        <button onclick="toggleAudio('scena1', this)">&#9654;</button> <!-- Play -->
+    </div>
+    <audio id="scena1" src="scena1.mp3" preload="auto"></audio>
+
+    <!-- Scena 2 -->
+    <div class="track-container">
+        <h2>Scena 2</h2>
+        <button onclick="toggleAudio('scena2', this)">&#9654;</button> <!-- Play -->
+    </div>
+    <audio id="scena2" src="scena2.mp3" preload="auto"></audio>
+
+    <!-- Scena 3 -->
+    <div class="track-container">
+        <h2>Scena 3</h2>
+        <button onclick="toggleAudio('scena3', this)">&#9654;</button> <!-- Play -->
+    </div>
+    <audio id="scena3" src="scena3.mp3" preload="auto"></audio>
+
+    <!-- Scena 4 -->
+    <div class="track-container">
+        <h2>Scena 4</h2>
+        <button onclick="toggleAudio('scena4', this)">&#9654;</button> <!-- Play -->
+    </div>
+    <audio id="scena4" src="scena4.mp3" preload="auto"></audio>
+
+    <!-- Scena 5 -->
+    <div class="track-container">
+        <h2>Scena 5</h2>
+        <button onclick="toggleAudio('scena5', this)">&#9654;</button> <!-- Play -->
+    </div>
+    <audio id="scena5" src="scena5.mp3" preload="auto"></audio>
+
+    <!-- Scena 6 -->
+    <div class="track-container">
+        <h2>Scena 6</h2>
+        <button onclick="toggleAudio('scena6', this)">&#9654;</button> <!-- Play -->
+    </div>
+    <audio id="scena6" src="scena6.mp3" preload="auto"></audio>
+
+    <!-- Scena 7 -->
+    <div class="track-container">
+        <h2>Scena 7</h2>
+        <button onclick="toggleAudio('scena7', this)">&#9654;</button> <!-- Play -->
+    </div>
+    <audio id="scena7" src="scena7.mp3" preload="auto"></audio>
+
+    <script>
+        function toggleAudio(id, button) {
+            var audioElement = document.getElementById(id);
+            if (audioElement.paused) {
+                audioElement.play();
+                button.innerHTML = '&#10074;&#10074;'; // Cambia il simbolo a Pause
+            } else {
+                audioElement.pause();
+                button.innerHTML = '&#9654;'; // Cambia il simbolo a Play
+            }
+        }
+    </script>
+
+</body>
+</html>

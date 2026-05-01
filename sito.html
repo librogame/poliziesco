@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>CRIME EXPRESS · Assassinio sul treno</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #0f0e12 0%, #1a171f 100%);
+            font-family: 'Courier New', 'SF Mono', 'Menlo', 'Consolas', monospace;
+            min-height: 100vh;
+            padding: 2rem 1.5rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 1.8rem;
+            border-bottom: 2px solid #c92a2a;
+            padding-bottom: 1rem;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            color: #e0dcd0;
+            text-shadow: 0 0 8px #c92a2a55, 2px 2px 0px #2a1e1e;
+            text-transform: uppercase;
+        }
+
+        .header p {
+            color: #9a8e7a;
+            font-style: italic;
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        /* pulsante musica */
+        .music-control {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.8rem;
+        }
+
+        .music-toggle {
+            background: #1e1b24;
+            border: 1px solid #c92a2a;
+            color: #e0dcd0;
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 0.6rem 1.8rem;
+            border-radius: 4px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.2s;
+            font-family: monospace;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .music-toggle:hover {
+            background: #c92a2a;
+            color: #0f0e12;
+            border-color: #e0dcd0;
+            box-shadow: 0 0 12px #c92a2a;
+        }
+
+        /* opere selector */
+        .opera-selector {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .opera-tab {
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 0.6rem 1.8rem;
+            border: none;
+            border-radius: 0px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: #1e1b24;
+            color: #bbb0a0;
+            font-family: monospace;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 2px solid transparent;
+        }
+
+        .opera-tab.active {
+            background: #2a242f;
+            color: #f0c0a0;
+            border-bottom: 2px solid #c92a2a;
+            box-shadow: 0 4px 12px rgba(201, 42, 42, 0.3);
+        }
+
+        .opera-tab:hover:not(.active) {
+            background: #2a242f;
+            color: #ddb892;
+        }
+
+        /* pulsanti scene - stile biglietti del treno / tessere */
+        .buttons-panel {
+            background: rgba(30, 27, 36, 0.6);
+            backdrop-filter: blur(2px);
+            padding: 1.2rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid #c92a2a;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .buttons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 0.9rem;
+        }
+
+        .btn-scena {
+            background: #1c1822;
+            color: #cbc3b0;
+            border: 1px solid #3a2e2e;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 0.7rem 0.4rem;
+            border-radius: 0px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-scena:hover {
+            background: #2a1f1f;
+            border-color: #c92a2a;
+            color: #f0d0b0;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(201, 42, 42, 0.3);
+        }
+
+        .opera1-buttons .btn-scena { border-left: 3px solid #8b3a3a; }
+        .opera2-buttons .btn-scena { border-left: 3px solid #5a6e5e; }
+
+        /* lettura area - stile vagone letto / rapporto della polizia */
+        .reading-area {
+            background: #0c0a10;
+            border: 1px solid #2a2020;
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.6);
+            overflow: hidden;
+        }
+
+        .reading-header {
+            background: #110e16;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 1rem;
+            border-bottom: 1px solid #c92a2a;
+        }
+
+        .reading-header h3 {
+            color: #cfa882;
+            font-weight: 500;
+            font-size: 1rem;
+            font-family: monospace;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            letter-spacing: 1px;
+        }
+
+        .clear-btn {
+            background: none;
+            border: 1px solid #5a3e3e;
+            color: #b8a28a;
+            padding: 0.3rem 1rem;
+            border-radius: 0px;
+            font-family: monospace;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .clear-btn:hover {
+            background: #c92a2a;
+            border-color: #e0dcd0;
+            color: black;
+        }
+
+        .libretto-content {
+            background: #f7f2e4;
+            background-image: radial-gradient(#e0d6c8 1px, transparent 1px);
+            background-size: 20px 20px;
+            min-height: 470px;
+            max-height: 550px;
+            overflow-y: auto;
+            padding: 2rem 2.2rem;
+            font-family: 'Courier New', 'Times New Roman', monospace;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #1e1915;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .empty-message {
+            color: #5a4a3a;
+            font-style: italic;
+            text-align: center;
+            padding: 3rem 1rem;
+            font-family: monospace;
+        }
+
+        .now-playing {
+            font-size: 0.7rem;
+            color: #9a8a72;
+            background: #110e16;
+            border-top: 1px solid #2a2020;
+            padding: 0.6rem 2rem;
+            font-family: monospace;
+            letter-spacing: 0.5px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.7rem;
+            color: #6a5a48;
+            border-top: 1px solid #2a1e1e;
+            padding-top: 1.2rem;
+            font-family: monospace;
+        }
+
+        @media (max-width: 750px) {
+            body { padding: 1rem; }
+            .btn-scena { font-size: 0.7rem; }
+            .libretto-content { padding: 1rem; font-size: 0.85rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>🚂 CRIME EXPRESS</h1>
+        <p>Assassinio sul treno</p>
+    </div>
+
+    <div class="music-control">
+        <button id="musicToggleBtn" class="music-toggle">🔊 MUSICA ATTIVA · SPEGNI</button>
+    </div>
+
+    <div class="opera-selector">
+        <button id="opera1Btn" class="opera-tab active">🕵️  ANDREA RUSSO</button>
+        <button id="opera2Btn" class="opera-tab">🕵️‍  LUCIA FERRARI</button>
+    </div>
+
+    <!-- Opera 1 pulsanti -->
+    <div id="opera1Buttons" class="buttons-panel opera1-buttons">
+        <div class="buttons-grid">
+            <button class="btn-scena" data-opera="1" data-scene="intro">🚂 INTRO</button>
+            <button class="btn-scena" data-opera="1" data-scene="scena1">🚪 SCENA 1</button>
+            <button class="btn-scena" data-opera="1" data-scene="scena2">🕵️ SCENA 2</button>
+            <button class="btn-scena" data-opera="1" data-scene="scena3">🔍 SCENA 3</button>
+            <button class="btn-scena" data-opera="1" data-scene="scena4">💣 SCENA 4</button>
+            <button class="btn-scena" data-opera="1" data-scene="scena5">🩸 SCENA 5</button>
+            <button class="btn-scena" data-opera="1" data-scene="scena6">🎬 SCENA 6</button>
+            <button class="btn-scena" data-opera="1" data-scene="scena7">🔚 SCENA 7</button>
+        </div>
+    </div>
+
+    <!-- Opera 2 pulsanti -->
+    <div id="opera2Buttons" class="buttons-panel opera2-buttons" style="display: none;">
+        <div class="buttons-grid">
+            <button class="btn-scena" data-opera="2" data-scene="intro">🚂 INTRO</button>
+            <button class="btn-scena" data-opera="2" data-scene="scena1">🚪 SCENA 1</button>
+            <button class="btn-scena" data-opera="2" data-scene="scena2">🕵️ SCENA 2</button>
+            <button class="btn-scena" data-opera="2" data-scene="scena3">🔍 SCENA 3</button>
+            <button class="btn-scena" data-opera="2" data-scene="scena4">💣 SCENA 4</button>
+            <button class="btn-scena" data-opera="2" data-scene="scena5">🩸 SCENA 5</button>
+            <button class="btn-scena" data-opera="2" data-scene="scena6">🎬 SCENA 6</button>
+            <button class="btn-scena" data-opera="2" data-scene="scena7">🔚 SCELA 7</button>
+        </div>
+    </div>
+
+    <div class="reading-area">
+        <div class="reading-header">
+            <h3>📜 LIBRETTO</h3>
+            <button id="clearReadingBtn" class="clear-btn">🗑️ PULISCI</button>
+        </div>
+        <div id="readingContainer" class="libretto-content">
+            <div class="empty-message">
+		⚡ ATTIVA L'AUDIO<br>
+                SELEZIONA L'INTRO<br>
+                L'AUDIO PARTIRÀ AUTOMATICAMENTE.
+            </div>
+        </div>
+        <div id="nowPlayingInfo" class="now-playing">🎧 NESSUN AUDIO IN RIPRODUZIONE</div>
+    </div>
+    <footer>
+        File audio: intro.mp3, scena1.mp3 … scena7.mp3 (stessi file per entrambi i casi).<br>
+        Noir atmosfera — treno, omicidio, detective e colpi di scena.
+    </footer>
+</div>
+
+<script>
+    // ============================================================
+    // TESTO CRIME - CASO 1: "L'OMBRA SUL TAPPETO"
+    // ============================================================
+    const crime1_intro = `[INTRO] · Treno notturno per Parigi. Ore 23:47.
+
+Un vagone silenzioso, luci fioche. Il corpo del signor Lancaster viene trovato nel compartimento 4B.
+Una valigetta aperta, una macchia scura sul tappeto. Il detective Arthur Vance accende una sigaretta e guarda l'orologio.
+
+VANCE (a se stesso):
+"Il treno non si ferma fino all'alba. Abbiamo sei ore per trovare l'assassino."
+
+Sullo sfondo, il fischio del treno taglia la notte.`;
+    const crime1_scena1 = `[SCENA 1] · Interrogatorio della contessa
+
+Contessa Elena Von Strauss si sistema il guanto di pizzo.
+
+VANCE: "Dov'era al momento del delitto, contessa?"
+
+CONTESSA: (sorride, tesa) "Nella carrozza ristorante. Il cameriere può confermarlo."
+
+VANCE: "Lei e Lancaster vi conoscevate vent'anni fa. A Vienna."
+
+La contessa impallidisce. Il treno frena bruscamente. Una valigia cade dallo scompartimento.`;
+    const crime1_scena2 = `[SCENA 2] · L'uomo dal pastrano
+
+Un uomo incappucciato cammina nel corridoio. Vance lo blocca.
+
+VANCE: "Documenti, per favore."
+
+SCONOSCIUTO: (voce rauca) "Sono un uomo d'affari. Non so nulla."
+
+VANCE: "Allora perché il suo cognome è inciso sulla valigetta della vittima?"
+
+Silenzio. Improvvisamente le luci si spengono per tre secondi. Quando si riaccendono, l'uomo è sparito.`;
+    const crime1_scena3 = `[SCENA 3] · La chiave nella tasca
+
+Vance fruga nella giacca del morto. Trova una chiave arrugginita con inciso "VAGONE 12 - SCOMPARTO"
+
+Il capotreno avvisa: "Signor Vance, il vagone 12 non esiste da dieci anni. Incidente ferroviario dimenticato."
+
+VANCE: "Allora perché questa notte qualcuno lo ha visto fermo sui binari accanto al nostro treno?"`;
+    const crime1_scena4 = `[SCENA 4] · La telefonata anonima
+
+Il telefono della sala controllo squilla. Una voce distorta:
+
+VOCE: "L'assassino è seduto al tavolo 7, nell'angolo. Guardi le sue scarpe... sono sporche di sangue."
+
+Vance corre nel vagone ristorante. Tavolo 7 vuoto, ma sul pavimento una ciocca di capelli biondi e un biglietto: "Colpevole è chi non parla mai."`;
+    const crime1_scena5 = `[SCENA 5] · Colpo di scena
+
+La contessa confessa: "Ho mentito. Ero nella sua cabina... per recuperare una lettera."
+
+VANCE: "Dov'è la lettera?"
+
+CONTESSA: "L'ha presa il cameriere. Ma lui è morto nello stesso istante?"
+
+In quel momento il cadavere del cameriere viene scoperto nel vagone bagagli. Due omicidi.`;
+    const crime1_scena6 = `[SCENA 6] · L'ispettore arriva dall'ombra
+
+Un secondo detective, arrivato chissà come, si presenta: ispettore Graves.
+
+GRAVES: "So chi è l'assassino. È seduto tra di noi, signor Vance... o devo chiamarla col suo vero nome? Alexander Lancaster Jr."
+
+Vance resta in silenzio. La tensione sale.`;
+    const crime1_scena7 = `[SCENA 7 - Epilogo] · Verità sui binari
+
+Vance (Alexander Jr.) confessa: "Mio padre uccise mia madre. Ho aspettato vent'anni."
+
+Graves lo ammanetta. Il treno fischia all'alba.
+
+GRAVES: "La giustizia arriva sempre, anche sui binari maledetti."
+
+Il sipario cala sul convoglio che scompare nella nebbia.`;
+
+    // ============================================================
+    // CASO 2: "IL SILENZIO DEL VAGONE 7"
+    // ============================================================
+    const crime2_intro = `[INTRO] · Orient Express, 3:15 del mattino.
+
+La vittima: un collezionista d'arte, ucciso con un punteruolo da ghiaccio.
+Il detective Lucia Marchetti nota un dettaglio: la finestra è aperta nonostante la neve.
+
+LUCLA (sottovoce): "Qualcuno è entrato... o qualcuno è uscito."
+
+Un biglietto sul cuscino: "IL SILENZIO È IL MIO ALIBI."`;
+    const crime2_scena1 = `[SCENA 1] · Lo specchietto rotto
+
+Lucia trova un frammento di specchio. Dentro il riflesso, un numero: "777".
+
+Il controllore impallidisce: "Il vagone 777 è una leggenda. Un treno fantasma."
+
+LUCLA: "Allora qualcuno sta usando la leggenda per uccidere."`;
+    const crime2_scena2 = `[SCENA 2] · La donna velata
+
+Una passeggera col volto coperto scarabocchia su un taccuino.
+
+LUCLA: "Buongiorno, posso vedere il suo biglietto?"
+
+DONNA: (voce tremante) "Non esiste. Sono un fantasma anch'io."
+
+Scompare nel corridoio. Sul taccuino lasciato scrive: "LA PROSSIMA VITTIMA SARAI TU."`;
+    const crime2_scena3 = `[SCENA 3] · Congiura segreta
+
+Lucia scopre che tutte le persone nel vagone 7 hanno partecipato vent'anni fa a una sparatoria in un casinò.
+
+Il morto era il testimone chiave che non aveva parlato.
+
+LUCLA: "Qualcuno sta facendo giustizia sommaria."`;
+    const crime2_scena4 = `[SCENA 4] · La seconda morte
+
+Un altro passeggero viene trovato senza vita nella doccia. Una pozzanghera rossa.
+
+Accanto a lui, una registrazione: "Basta, smetto di mentire..."
+
+La voce si interrompe. Colpo di pistola nei dintorni del treno.`;
+    const crime2_scena5 = `[SCENA 5] · L'agguato nel tunnel
+
+Il treno entra in un tunnel lungo. Buio pesto.
+
+Lucia sente un respiro alle spalle, poi un sibilo. Schiva un coltello.
+
+LUCLA: "Chi sei?"
+
+ASSASSINO: (sussurra) "Sono la vendetta di chi hai dimenticato."
+
+Le luci tornano. Nessuno. Solo una rosa nera sul pavimento.`;
+    const crime2_scena6 = `[SCENA 6] · Il testamento del morto
+
+Nel bagaglio della vittima, Lucia trova un testamento olografo in cui confessava l'omicidio del padre dell'assassino.
+
+LUCLA (al microfono): "Assassino, so che stai ascoltando. La verità è più pesante del delitto."
+
+Uno specchio si incrina.`;
+    const crime2_scena7 = `[SCENA 7 - Epilogo] · Confessione finale
+
+Un uomo anziano si alza. Piange.
+
+UOMO: "Ero io. Ho ucciso per vendetta. Ma ora... ora voglio pace."
+
+Lucia lo ammanetta dolcemente. Il treno arriva in stazione. Polizia fuori.
+
+LUCLA: "La giustizia non si fa con le mani sporche."
+
+Sipario. Fumo. Titoli di coda.`;
+
+    // Mappatura testi
+    const testiOpera1 = { intro: crime1_intro, scena1: crime1_scena1, scena2: crime1_scena2, scena3: crime1_scena3, scena4: crime1_scena4, scena5: crime1_scena5, scena6: crime1_scena6, scena7: crime1_scena7 };
+    const testiOpera2 = { intro: crime2_intro, scena1: crime2_scena1, scena2: crime2_scena2, scena3: crime2_scena3, scena4: crime2_scena4, scena5: crime2_scena5, scena6: crime2_scena6, scena7: crime2_scena7 };
+    const titoliOpera1 = { intro: "INTRO · L'ombra sul tappeto", scena1: "SCENA 1 · Interrogatorio", scena2: "SCENA 2 · L'uomo dal pastrano", scena3: "SCENA 3 · La chiave", scena4: "SCENA 4 · Telefonata", scena5: "SCENA 5 · Colpo di scena", scena6: "SCENA 6 · L'ispettore", scena7: "SCENA 7 · Verità" };
+    const titoliOpera2 = { intro: "INTRO · vagone 7", scena1: "SCENA 1 · Specchietto", scena2: "SCENA 2 · La donna velata", scena3: "SCENA 3 · Congiura", scena4: "SCENA 4 · Seconda morte", scena5: "SCENA 5 · Tunnel", scena6: "SCENA 6 · Testamento", scena7: "SCENA 7 · Confessione" };
+
+    // --- AUDIO (stessa logica) -----
+    let currentAudio = null;
+    let isMusicEnabled = true;
+    const audioFiles = { intro: "intro.mp3", scena1: "scena1.mp3", scena2: "scena2.mp3", scena3: "scena3.mp3", scena4: "scena4.mp3", scena5: "scena5.mp3", scena6: "scena6.mp3", scena7: "scena7.mp3" };
+    function stopAudio() { if (currentAudio) { currentAudio.pause(); currentAudio = null; } document.getElementById('nowPlayingInfo').innerHTML = "🎧 NESSUN AUDIO IN RIPRODUZIONE"; }
+    function playAudio(sceneKey) {
+        if (!isMusicEnabled) { if (currentAudio) currentAudio.pause(); currentAudio = null; document.getElementById('nowPlayingInfo').innerHTML = "🔇 AUDIO DISATTIVATO"; return; }
+        if (currentAudio) currentAudio.pause();
+        const file = audioFiles[sceneKey];
+        if (!file) { document.getElementById('nowPlayingInfo').innerHTML = "⚠️ FILE MANCANTE"; return; }
+        const audio = new Audio(file);
+        audio.play().catch(() => document.getElementById('nowPlayingInfo').innerHTML = `❌ ERRORE: ${file} non trovato`);
+        currentAudio = audio;
+        document.getElementById('nowPlayingInfo').innerHTML = `🎧 RIPRODUZIONE: ${sceneKey.toUpperCase()} · ${file}`;
+        audio.addEventListener('ended', () => { if (currentAudio === audio) { currentAudio = null; if(isMusicEnabled) document.getElementById('nowPlayingInfo').innerHTML = "🎬 AUDIO TERMINATO"; } });
+    }
+    function mostraScena(opera, sceneKey) {
+        const testi = opera === 1 ? testiOpera1 : testiOpera2;
+        const titoli = opera === 1 ? titoliOpera1 : titoliOpera2;
+        const testo = testi[sceneKey];
+        if (!testo) return;
+        document.getElementById('readingContainer').innerHTML = `<div style="margin-bottom:1rem;border-left:4px solid #c92a2a;padding-left:1rem"><strong style="font-size:1.2rem;">🚂 ${titoli[sceneKey]}</strong><br><span style="font-size:0.7rem;">${opera === 1 ? "CASO N.1 · L'OMBRA" : "CASO N.2 · SILENZIO"}</span></div><div style="white-space:pre-wrap; font-family:'Courier New'">${testo.replace(/[&<>]/g, m => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;' }[m]))}</div>`;
+        playAudio(sceneKey);
+    }
+    // UI
+    const musicToggle = document.getElementById('musicToggleBtn');
+    musicToggle.onclick = () => { isMusicEnabled = !isMusicEnabled; musicToggle.innerHTML = isMusicEnabled ? "🔊 MUSICA ATTIVA · SPEGNI" : "🔇 MUSICA SPENTA · ACCENDI"; if(!isMusicEnabled && currentAudio) { currentAudio.pause(); currentAudio=null; } };
+    function setActiveOpera(o) { document.getElementById('opera1Buttons').style.display = o===1 ? 'block' : 'none'; document.getElementById('opera2Buttons').style.display = o===2 ? 'block' : 'none'; document.getElementById('opera1Btn').classList.toggle('active', o===1); document.getElementById('opera2Btn').classList.toggle('active', o===2); }
+    document.getElementById('opera1Btn').onclick = () => setActiveOpera(1);
+    document.getElementById('opera2Btn').onclick = () => setActiveOpera(2);
+    document.querySelectorAll('.btn-scena').forEach(btn => btn.onclick = () => { const op = parseInt(btn.dataset.opera); const sc = btn.dataset.scene; if (!isNaN(op) && sc) mostraScena(op, sc); });
+    document.getElementById('clearReadingBtn').onclick = () => { document.getElementById('readingContainer').innerHTML = '<div class="empty-message">⚡ SCHERMO PULITO · SELEZIONA UNA SCENA</div>'; stopAudio(); };
+    setActiveOpera(1);
+    stopAudio();
+</script>
+</body>
+</html>
