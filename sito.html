@@ -315,162 +315,364 @@
         <div id="nowPlayingInfo" class="now-playing">🎧 NESSUN AUDIO IN RIPRODUZIONE</div>
     </div>
     <footer>
-        File audio: intro.mp3, scena1.mp3 … scena7.mp3 (stessi file per entrambi i casi).<br>
-        Noir atmosfera — treno, omicidio, detective e colpi di scena.
+       Crime Express  — Assassinio sul treno
     </footer>
 </div>
 
 <script>
     // ============================================================
-    // TESTO CRIME - CASO 1: "L'OMBRA SUL TAPPETO"
+    // TESTO CRIME - CASO 1: "CRIME EXPRESS"
     // ============================================================
-    const crime1_intro = `[INTRO] · Treno notturno per Parigi. Ore 23:47.
+    const crime1_intro = `
 
-Un vagone silenzioso, luci fioche. Il corpo del signor Lancaster viene trovato nel compartimento 4B.
-Una valigetta aperta, una macchia scura sul tappeto. Il detective Arthur Vance accende una sigaretta e guarda l'orologio.
+[Quando termina l'audio VAI A SCENA 1]
+`;
+    const crime1_scena1 = `
 
-VANCE (a se stesso):
-"Il treno non si ferma fino all'alba. Abbiamo sei ore per trovare l'assassino."
+L'Espresso delle Nuvole è fermo sui binari. Fuori, la nebbia avvolge le montagne. All'interno dello scompartimento della vittima, il corpo di Giovanni Alberti giace sul pavimento. I due investigatori entrano nella scena.
 
-Sullo sfondo, il fischio del treno taglia la notte.`;
-    const crime1_scena1 = `[SCENA 1] · Interrogatorio della contessa
+"Chi siete voi? Cosa ci fate qui?" chiede la donna, con voce rotta dal pianto.
 
-Contessa Elena Von Strauss si sistema il guanto di pizzo.
+...
 
-VANCE: "Dov'era al momento del delitto, contessa?"
+"Sono la signora Alberti. La moglie. Voglio sapere chi ha fatto questo a mio marito."
 
-CONTESSA: (sorride, tesa) "Nella carrozza ristorante. Il cameriere può confermarlo."
+ANDREA: "Proprio quello che stiamo cercando di scoprire, signora. Adesso la prego, si faccia da parte e ci lasci lavorare."
 
-VANCE: "Lei e Lancaster vi conoscevate vent'anni fa. A Vienna."
+La donna si allontana lentamente, ma si ferma sulla porta come se volesse dire qualcosa. Poi esce senza parlare. Il treno scricchiola. Un lampo illumina il cielo.
 
-La contessa impallidisce. Il treno frena bruscamente. Una valigia cade dallo scompartimento.`;
-    const crime1_scena2 = `[SCENA 2] · L'uomo dal pastrano
+...
 
-Un uomo incappucciato cammina nel corridoio. Vance lo blocca.
+ANDREA: "Esamino il corpo. Ferita alla tempia, un colpo secco e preciso. Nessun segno di lotta: le unghie sono pulite, i vestiti in ordine. Alberti non ha avuto il tempo di difendersi. L'assassino era qualcuno di cui si fidava."
 
-VANCE: "Documenti, per favore."
+Lucia si avvicina alla finestra e osserva il davanzale. Si china e raccoglie qualcosa da terra.
 
-SCONOSCIUTO: (voce rauca) "Sono un uomo d'affari. Non so nulla."
+...
 
-VANCE: "Allora perché il suo cognome è inciso sulla valigetta della vittima?"
+Ti avvicini al letto della vittima e osservi il cuscino.
 
-Silenzio. Improvvisamente le luci si spengono per tre secondi. Quando si riaccendono, l'uomo è sparito.`;
-    const crime1_scena3 = `[SCENA 3] · La chiave nella tasca
+ANDREA: "Un capello lungo, biondo. Sul cuscino di Alberti. La moglie ha i capelli scuri. Non è suo. Qualcun'altra è stata qui. Forse la stessa persona del fazzoletto. Il taccuino. Alberti lo teneva sempre nella tasca interna della giacca, me l'ha detto il capotreno. Ora non c'è. La giacca è ancora chiusa, ma la tasca è vuota. Qualcuno l'ha preso."
 
-Vance fruga nella giacca del morto. Trova una chiave arrugginita con inciso "VAGONE 12 - SCOMPARTO"
+Un tuono squarcia il silenzio. Le luci del treno tremolano. Si sentono passi frettolosi nel corridoio.
 
-Il capotreno avvisa: "Signor Vance, il vagone 12 non esiste da dieci anni. Incidente ferroviario dimenticato."
+...
 
-VANCE: "Allora perché questa notte qualcuno lo ha visto fermo sui binari accanto al nostro treno?"`;
-    const crime1_scena4 = `[SCENA 4] · La telefonata anonima
+ANDREA: "Allora, riassumiamo. La finestra è aperta, quindi qualcuno è entrato o uscito di qui. Poi c'è un fazzoletto con le iniziali R.F., una donna è stata in questo scompartimento. E sul cuscino un capello biondo, la stessa donna è stata qui, e non per poco. Il taccuino di Alberti è sparito, l'assassino cercava qualcosa di preciso. E abbiamo sentito dei passi nel corridoio, qualcuno ci spiava. Alberti non ha nemmeno provato a difendersi, conosceva il suo assassino. Ora dobbiamo decidere. Possiamo perquisire a fondo lo scompartimento, magari l'assassino ha lasciato altri indizi. Oppure blocchiamo le uscite, così l'assassino non scappa, ma rischiamo di perdere tempo."
 
-Il telefono della sala controllo squilla. Una voce distorta:
+...
 
-VOCE: "L'assassino è seduto al tavolo 7, nell'angolo. Guardi le sue scarpe... sono sporche di sangue."
+🎵 → VAI A SCENA 3
+ `;
+    const crime1_scena2 = `
 
-Vance corre nel vagone ristorante. Tavolo 7 vuoto, ma sul pavimento una ciocca di capelli biondi e un biglietto: "Colpevole è chi non parla mai."`;
-    const crime1_scena5 = `[SCENA 5] · Colpo di scena
+Lo scompartimento di Giovanni Alberti è stato perquisito. Nascosti in vari punti del vagone diversi pezzi di carta strappata.
 
-La contessa confessa: "Ho mentito. Ero nella sua cabina... per recuperare una lettera."
+ANDREA: "Abbiamo sei frammenti. Mettiamoli sul tavolo e proviamo a ricomporli. Sembra che qualcuno abbia strappato il foglietto con rabbia, poi abbia nascosto i pezzi in fretta in posti diversi."
 
-VANCE: "Dov'è la lettera?"
+I SEI FRAMMENTI: 
 
-CONTESSA: "L'ha presa il cameriere. Ma lui è morto nello stesso istante?"
+«el ricat» 
+«Ven»
+«ti parlo.»
+«tro domani. Altrimen»
+«to. 200.000 en»
+«turi sa d»
 
-In quel momento il cadavere del cameriere viene scoperto nel vagone bagagli. Due omicidi.`;
-    const crime1_scena6 = `[SCENA 6] · L'ispettore arriva dall'ombra
+ANDREA: "Proviamo a unirli come un puzzle. Cerchiamo le parole che si incastrano."
 
-Un secondo detective, arrivato chissà come, si presenta: ispettore Graves.
+...
 
-GRAVES: "So chi è l'assassino. È seduto tra di noi, signor Vance... o devo chiamarla col suo vero nome? Alexander Lancaster Jr."
+🎵 → VAI A SCENA 4
+`;
+    const crime1_scena3 = `
 
-Vance resta in silenzio. La tensione sale.`;
-    const crime1_scena7 = `[SCENA 7 - Epilogo] · Verità sui binari
+Lucia ha deciso di bloccare le uscite del treno. Il tempo passa. La tensione sale. La nebbia fuori si è fatta più fitta.
 
-Vance (Alexander Jr.) confessa: "Mio padre uccise mia madre. Ho aspettato vent'anni."
+...
 
-Graves lo ammanetta. Il treno fischia all'alba.
+ANDREA: "Ho parlato con il capotreno. Niente. Ho persino frugato nella spazzatura del vagone ristorante. Niente. Il taccuino non c'è, l'arma non c'è, e i testimoni hanno tutti un alibi o tacciono per paura. Abbiamo sbagliato strategia, Lucia. Invece di bloccare le uscite e inseguire false piste, avremmo dovuto perquisire a fondo lo scompartimento di Alberti fin dall'inizio. Forse avremmo trovato qualcosa. Ora è troppo tardi. O forse no. Dobbiamo decidere: continuiamo su questa strada o torniamo indietro e facciamo le cose per bene?"
 
-GRAVES: "La giustizia arriva sempre, anche sui binari maledetti."
+...
 
-Il sipario cala sul convoglio che scompare nella nebbia.`;
+🎵 → VAI A SCENA 6
+`;
+    const crime1_scena4 = `
+
+Lucia ha deciso di arrestare Marco Venturi. L'uomo è stato portato in uno scompartimento vuoto. Entrate per interrogarlo.
+
+...
+
+Venturi alza lo sguardo. Sembra stanco, spaventato. "Non sono stato io. Non avrei mai ucciso Alberti. Ok, è vero, mi ricattava. Aveva scoperto che sottraevo soldi all'azienda. Voleva 200.000 per tacere. Ma li avevo. Avevo i soldi. Dovevo consegnarglieli ieri sera, ma quando sono andato nel suo scompartimento... era già morto. Ho avuto paura. Sono scappato. Per questo nessuno mi ha visto. Ma non sono stato io."
+
+ANDREA: "Se non è stato lei, chi è stato? Alberti aveva altri nemici? Altri debiti? Altri segreti?"
+
+Venturi esita. Guarda fuori dal finestrino, poi abbassa lo sguardo. "C'era una donna. Roberta Fontana. La signora in rosso. Alberti aveva una chiave dello scompartimento. La sera del delitto l'ho vista passare avanti e indietro nel corridoio. Credo che sia stata lei. Ma non posso provarlo."
+
+Vi guardate.
+
+👀ANDREA: "Seguiamo la pista di Venturi. Perquisiamo la borsa della signora in rosso. Se troviamo la chiave della cassetta o il taccuino, il caso è chiuso." → VAI A SCENA 5
+
+👀ANDREA: "Non crediamo a Venturi. Forse sta cercando di deviare i sospetti. Restiamo su di lui." → VAI A SCENA 7
+
+🎵 → VAI A  SCENA 7
+`;
+    const crime1_scena5 = `
+
+Lo scompartimento di Marco Venturi è stato perquisito. Una pistola è stata nascosta sotto il materasso e un biglietto scritto a mano nel cassetto del comodino. Inoltre, tra le carte di Venturi, trovate una lettera.
+
+ANDREA: "Questa pistola non ha mai sparato. Guarda la canna, è pulita, nessun residuo di polvere da sparo. Non è l'arma del delitto, Alberti è stato ucciso con un oggetto contundente. Ma allora perché Venturi la teneva nascosta? Forse qualcuno l'ha messa qui per incastrarlo, o forse Venturi aveva paura di qualcuno e si teneva un'arma per difendersi. In ogni caso, è un indizio. E questo biglietto... guarda la grafia. È la stessa del taccuino di Alberti. Lui ha scritto: "Se succede qualcosa, controllate la signora in rosso. Lei sa tutto."
+
+...
+
+ANDREA: "Allora Alberti sospettava di qualcuno, ma non di Venturi. La signora in rosso. Le iniziali R.F. del fazzoletto. Il capello biondo sul cuscino. La relazione segreta. Tutto porta a lei. Lei lo ha ucciso, ha preso il taccuino per proteggere sé stessa, e ha nascosto la pistola nello scompartimento di Venturi per deviare i sospetti. Ma ha sbagliato. Alberti era più furbo. Ha lasciato questo biglietto per indicarci la vera colpevole."
+
+Il treno fischia in lontananza. La pioggia ha smesso. La nebbia si sta diradando.
+
+ANDREA: "Abbiamo abbastanza prove per arrestarla. Non possiamo aspettare oltre. Andiamo da lei, perquisiamo la sua borsa, e se troviamo il taccuino, il caso è chiuso."
+
+...
+
+Il treno è fermo alla stazione. La nebbia si è diradata. Il sole filtra tra le nuvole. Una fila di auto della polizia attende sul binario. La signora in rosso, Roberta Fontana, cammina tra due agenti. Le mani sono ammanettate.
+
+...
+
+ANDREA: "Ce l'abbiamo fatta. Non è stato facile. Ma alla fine le prove parlavano chiaro: il fazzoletto con le iniziali R.F., il taccuino nella sua borsa, la lettera di separazione. E la chiave dello scompartimento di Alberti nella sua giacca."
+
+...
+
+Il treno emette un fischio. Si allontana lentamente dalla stazione.
+
+ANDREA: "Un'altra notte, un altro caso chiuso. Mi offri un caffè prima che torni in ufficio a scrivere il rapporto?"
+
+...
+
+FINE
+
+`;
+    const crime1_scena6 = `
+
+Il treno è fermo alla stazione. La nebbia non si è ancora alzata. I finestrini sono appannati. I passeggeri scendono uno a uno. Le auto della polizia attendono, ma non c'è nessuno da arrestare.
+
+...
+
+Ti appoggi al finestrino. La pioggia scorre lenta sul vetro.
+
+...
+
+Il treno emette un fischio lungo e cupo. Si prepara a ripartire.
+
+ANDREA: "Un'altra notte, un altro caso che ci rimarrà sulla coscienza. Forse è la natura del nostro lavoro. Forse non si può vincere sempre. Ma questa volta... questa volta potevamo farcela. Abbiamo avuto tutte le occasioni, tutti gli indizi. Abbiamo solo scelto male."
+
+...
+
+FINE
+`;
+    const crime1_scena7 = `
+
+Hai deciso di non credere a Venturi. L'uomo viene trattenuto in custodia. La signora in rosso scende dal treno alla stazione successiva, nessuno la ferma. Il treno riparte. Le ore passano.
+
+...
+
+Ti siedi sul bordo del letto nello scompartimento vuoto. La testa tra le mani.
+
+ANDREA: "Avevamo tutte le prove. Il fazzoletto con le sue iniziali. Il capello sul cuscino. Venturi ci ha detto il suo nome, e noi non gli abbiamo creduto. Abbiamo preferito tenere in custodia un innocente mentre la vera assassina scappava."
+
+Il treno è fermo alla stazione finale. I passeggeri scendono. La nebbia si è alzata, ma il sole non è ancora uscito.
+
+...
+
+ANDREA: "Un'altra notte, un altro caso che potevamo risolvere. Abbiamo avuto la verità davanti agli occhi. Abbiamo scelto di non vederla."
+
+Uscite dallo scompartimento. Il treno è vuoto. I vostri passi echeggiano nel corridoio silenzioso.
+
+...
+
+FINE
+
+`;
 
     // ============================================================
-    // CASO 2: "IL SILENZIO DEL VAGONE 7"
+    // CASO 1: "CRIME EXPRESS"
     // ============================================================
-    const crime2_intro = `[INTRO] · Orient Express, 3:15 del mattino.
+    const crime2_intro = `
 
-La vittima: un collezionista d'arte, ucciso con un punteruolo da ghiaccio.
-Il detective Lucia Marchetti nota un dettaglio: la finestra è aperta nonostante la neve.
+[Quando termina l'audio VAI A SCENA 1]
+`;
+    const crime2_scena1 = `
 
-LUCLA (sottovoce): "Qualcuno è entrato... o qualcuno è uscito."
+L'Espresso delle Nuvole è fermo sui binari. Fuori, la nebbia avvolge le montagne. All'interno dello scompartimento della vittima, il corpo di Giovanni Alberti giace sul pavimento.I due investigatori entrano nella scena.
 
-Un biglietto sul cuscino: "IL SILENZIO È IL MIO ALIBI."`;
-    const crime2_scena1 = `[SCENA 1] · Lo specchietto rotto
+"Chi siete voi? Cosa ci fate qui?" chiede la donna, con voce rotta dal pianto.
 
-Lucia trova un frammento di specchio. Dentro il riflesso, un numero: "777".
+LUCIA: "Lucia Ferrari, ispettore della polizia giudiziaria. Lui è Andrea Russo, investigatore privato. Siamo stati incaricati di seguire questo caso. E lei chi è?"
 
-Il controllore impallidisce: "Il vagone 777 è una leggenda. Un treno fantasma."
+"Sono la signora Alberti. La moglie. Voglio sapere chi ha fatto questo a mio marito."
 
-LUCLA: "Allora qualcuno sta usando la leggenda per uccidere."`;
-    const crime2_scena2 = `[SCENA 2] · La donna velata
+...
 
-Una passeggera col volto coperto scarabocchia su un taccuino.
+La donna si allontana lentamente, ma si ferma sulla porta come se volesse dire qualcosa. Poi esce senza parlare. Il treno scricchiola. Un lampo illumina il cielo.
 
-LUCLA: "Buongiorno, posso vedere il suo biglietto?"
+LUCIA: "La finestra è aperta, ma fuori c'è la nebbia e fa freddo. Nessuno aprirebbe la finestra in una notte come questa a meno che non dovesse entrare o uscire in fretta. E poi ho sentito dei passi nel corridoio poco fa, come se qualcuno ci stesse aspettando prima di scappare."
 
-DONNA: (voce tremante) "Non esiste. Sono un fantasma anch'io."
+...
 
-Scompare nel corridoio. Sul taccuino lasciato scrive: "LA PROSSIMA VITTIMA SARAI TU."`;
-    const crime2_scena3 = `[SCENA 3] · Congiura segreta
+Ti si avvicini alla finestra e osservi il davanzale. Ti chini e raccogli qualcosa da terra.
 
-Lucia scopre che tutte le persone nel vagone 7 hanno partecipato vent'anni fa a una sparatoria in un casinò.
+LUCIA: "Guarda qui. Un fazzoletto di pizzo, come quello della signora Alberti ma di un colore diverso. Ha le iniziali ricamate: R.F. Non è della vittima, e non è della moglie. Qualcun altro era qui. Una donna."
 
-Il morto era il testimone chiave che non aveva parlato.
+Andrea si avvicina al letto della vittima e osserva il cuscino.
 
-LUCLA: "Qualcuno sta facendo giustizia sommaria."`;
-    const crime2_scena4 = `[SCENA 4] · La seconda morte
+...
 
-Un altro passeggero viene trovato senza vita nella doccia. Una pozzanghera rossa.
+Un tuono squarcia il silenzio. Le luci del treno tremolano. Si sentono passi frettolosi nel corridoio.
 
-Accanto a lui, una registrazione: "Basta, smetto di mentire..."
+LUCIA: "Hai sentito? Qualcuno ci stava spiando. Appena siamo entrati, si è fermato davanti alla porta. Poi è scappato. Forse l'assassino, forse qualcuno che sa qualcosa e ha paura."
 
-La voce si interrompe. Colpo di pistola nei dintorni del treno.`;
-    const crime2_scena5 = `[SCENA 5] · L'agguato nel tunnel
+...
 
-Il treno entra in un tunnel lungo. Buio pesto.
+👀LUCIA: "Perquisiamo lo scompartimento. L'assassino potrebbe aver lasciato altre prove." → VAI A SCENA 2
 
-Lucia sente un respiro alle spalle, poi un sibilo. Schiva un coltello.
+👀LUCIA: "Blocchiamo le uscite." → VAI A SCENA 3
 
-LUCLA: "Chi sei?"
+🎵 → VAI A SCENA 3
 
-ASSASSINO: (sussurra) "Sono la vendetta di chi hai dimenticato."
+`;
+    const crime2_scena2 = `
 
-Le luci tornano. Nessuno. Solo una rosa nera sul pavimento.`;
-    const crime2_scena6 = `[SCENA 6] · Il testamento del morto
+Lo scompartimento di Giovanni Alberti è stato perquisito. Nascosti in vari punti del vagone diversi pezzi di carta strappata.
 
-Nel bagaglio della vittima, Lucia trova un testamento olografo in cui confessava l'omicidio del padre dell'assassino.
+...
 
-LUCLA (al microfono): "Assassino, so che stai ascoltando. La verità è più pesante del delitto."
+I SEI FRAMMENTI: 
 
-Uno specchio si incrina.`;
-    const crime2_scena7 = `[SCENA 7 - Epilogo] · Confessione finale
+«el ricat» 
+«Ven»
+«ti parlo.»
+«tro domani. Altrimen»
+«to. 200.000 en»
+«turi sa d»
 
-Un uomo anziano si alza. Piange.
+...
 
-UOMO: "Ero io. Ho ucciso per vendetta. Ma ora... ora voglio pace."
+👀LUCIA: "Perquisiamo lo scompartimento di Venturi. Cerchiamo prove fisiche: il taccuino, l'arma, qualcosa che lo colleghi al delitto." → VAI A SCENA 5
 
-Lucia lo ammanetta dolcemente. Il treno arriva in stazione. Polizia fuori.
+👀LUCIA: "Arrestiamo Venturi. Il foglietto è sufficiente. Lo interroghiamo in custodia." → VAI A SCENA 4
 
-LUCLA: "La giustizia non si fa con le mani sporche."
+🎵 → VAI A SCENA 4
 
-Sipario. Fumo. Titoli di coda.`;
+`;
+    const crime2_scena3 = `
+
+Hai deciso di bloccare le uscite del treno. Il tempo passa. La tensione sale. La nebbia fuori si è fatta più fitta.
+
+LUCIA: "Abbiamo bloccato tutte le uscite e interrogato mezza dozzina di passeggeri. Nessuno ha visto nulla, o almeno nessuno vuole parlare. La signora con le iniziali R.F. si è rivelata essere una vecchia amica di Alberti, nessun legame con il delitto. Il suo alibi è solido: era a cena con altre due persone al momento dell'omicidio. Abbiamo perso ore preziose. Nel frattempo, chiunque abbia ucciso Alberti ha avuto tutto il tempo per nascondere le prove. Il taccuino potrebbe essere andato perduto per sempre."
+
+...
+
+👀LUCIA: "Torniamo indietro. Perquisiamo lo scompartimento di Alberti come avremmo dovuto fare dall'inizio. Forse c'è ancora qualcosa che ci è sfuggito." → VAI A SCENA 2
+
+👀LUCIA: "Continuiamo su questa strada. Ormai ci siamo, qualcosa troveremo. Non possiamo tornare indietro adesso." → VAI A SCENA 6
+
+🎵 → VAI A SCENA 6
+
+`;
+    const crime2_scena4 = `
+
+Hai deciso di arrestare Marco Venturi. L'uomo è stato portato in uno scompartimento vuoto. Entrate per interrogarlo.
+
+LUCIA: "Signor Venturi, lei è in arresto per l'omicidio di Giovanni Alberti. Abbiamo il suo cognome sul foglietto strappato, abbiamo la cifra di 200.000, abbiamo la scadenza di ieri sera. E nessuno può confermare dove fosse al momento del delitto. Ha qualcosa da dire prima che lo portiamo via?"
+
+Venturi alza lo sguardo. Sembra stanco, spaventato. "Non sono stato io. Non avrei mai ucciso Alberti. Ok, è vero, mi ricattava. Aveva scoperto che sottraevo soldi all'azienda. Voleva 200.000 per tacere. Ma li avevo. Avevo i soldi. Dovevo consegnarglieli ieri sera, ma quando sono andato nel suo scompartimento... era già morto. Ho avuto paura. Sono scappato. Per questo nessuno mi ha visto. Ma non sono stato io."
+
+...
+
+Venturi esita. Guarda fuori dal finestrino, poi abbassa lo sguardo. "C'era una donna. Roberta Fontana. La signora in rosso. Alberti aveva una chiave dello scompartimento. La sera del delitto l'ho vista passare avanti e indietro nel corridoio. Credo che sia stata lei. Ma non posso provarlo."
+
+Vi guardate.
+
+...
+
+🎵 → VAI A SCENA 7
+
+`;
+    const crime2_scena5 = `
+
+Lo scompartimento di Marco Venturi è stato perquisito. Una pistola è stata nascosta sotto il materasso e un biglietto scritto a mano nel cassetto del comodino. Inoltre, tra le carte di Venturi, trovate una lettera.
+
+...
+
+LUCIA: "E guarda qui. Una lettera. È di Alberti. Scrive: "Devo lasciarla. Questa relazione con Roberta non può continuare. Domani le dirò tutto." Alberti aveva una relazione con Roberta Fontana, la signora in rosso. Stava per lasciarla. Questo è il movente. Gelosia."
+
+...
+
+Il treno fischia in lontananza. La pioggia ha smesso. La nebbia si sta diradando.
+
+...
+
+LUCIA: "Sono d'accordo. Andiamo. Ma attenzione: potrebbe essere pericolosa. Ha già ucciso una volta, non esiterà a farlo di nuovo se si sente accerchiata. Teniamo gli occhi aperti e non lasciamola sola un istante. Quando la fermiamo, dobbiamo essere pronti a tutto."
+
+Il treno è fermo alla stazione. La nebbia si è diradata. Il sole filtra tra le nuvole. Una fila di auto della polizia attende sul binario. La signora in rosso, Roberta Fontana, cammina tra due agenti. Le mani sono ammanettate.
+
+LUCIA: "Roberta Fontana, lei è in arresto per l'omicidio di Giovanni Alberti. Ha il diritto di rimanere in silenzio. Qualsiasi cosa dirà potrà essere usata contro di lei in tribunale."
+
+...
+
+LUCIA: "Alberti stava per lasciarla. Lei ha ucciso per gelosia. Ma ha sbagliato. Ha lasciato troppe tracce."
+
+Il treno emette un fischio. Si allontana lentamente dalla stazione.
+
+...
+
+LUCIA: "Te lo devo. Ma questa volta lo prendiamo al bar. Ne ho abbastanza del caffè della stazione."
+
+FINE
+`;
+    const crime2_scena6 = `
+
+Il treno è fermo alla stazione. La nebbia non si è ancora alzata. I finestrini sono appannati. I passeggeri scendono uno a uno. Le auto della polizia attendono, ma non c'è nessuno da arrestare.
+
+LUCIA: "Abbiamo sbagliato. Abbiamo inseguito false piste, abbiamo perso tempo, abbiamo bloccato le uscite quando dovevamo perquisire. Ora è troppo tardi. La donna che sospettavamo è scesa dal treno alla stazione precedente, nessuno l'ha fermata. Il taccuino non è mai stato trovato. E non abbiamo un colpevole. Non sappiamo chi abbia ucciso Alberti. Forse non lo sapremo mai."
+
+Andrea si appoggia al finestrino. La pioggia scorre lenta sul vetro.
+
+LUCIA: "Il caso è chiuso. Archiviato per mancanza di prove. Troppi errori procedurali, troppe ore perse, troppe mosse sbagliate. Alberti resterà un uomo ucciso da uno sconosciuto. La verità se ne andrà con quella donna, chissà dove, chissà con chi."
+
+Il treno emette un fischio lungo e cupo. Si prepara a ripartire.
+
+...
+
+LUCIA: "Andiamo. C'è un altro caso che ci aspetta in ufficio. Magari questo, almeno, lo risolveremo."
+
+FINE
+`;
+    const crime2_scena7 = `
+
+Andrea ha deciso di non credere a Venturi. L'uomo viene trattenuto in custodia. La signora in rosso scende dal treno alla stazione successiva, nessuno la ferma. Il treno riparte. Le ore passano.
+
+LUCIA: "Abbiamo sbagliato. Venturi era innocente. Lo abbiamo capito troppo tardi. Dopo ore di interrogatorio, dopo aver controllato il suo alibi, dopo aver scoperto che qualcun altro aveva usato la sua pistola per incastrarlo. Ma ormai la signora in rosso era sparita. Roberta Fontana. Nessuno sa dove sia andata."
+
+Andrea si siede sul bordo del letto nello scompartimento vuoto. La testa tra le mani.
+
+...
+
+Il treno è fermo alla stazione finale. I passeggeri scendono. La nebbia si è alzata, ma il sole non è ancora uscito.
+
+LUCIA: "Il caso è chiuso. Archiviato. Venturi è stato rilasciato per mancanza di prove. La signora in rosso è sparita nel nulla. E noi torniamo in ufficio con un caso in meno sulla scrivania, ma con un peso in più sulla coscienza."
+
+...
+
+Uscite dallo scompartimento. Il treno è vuoto. I vostri passi echeggiano nel corridoio silenzioso.
+
+LUCIA: "Andiamo. C'è un altro caso che ci aspetta. Magari questo, almeno, lo risolveremo."
+
+FINE
+`;
 
     // Mappatura testi
     const testiOpera1 = { intro: crime1_intro, scena1: crime1_scena1, scena2: crime1_scena2, scena3: crime1_scena3, scena4: crime1_scena4, scena5: crime1_scena5, scena6: crime1_scena6, scena7: crime1_scena7 };
     const testiOpera2 = { intro: crime2_intro, scena1: crime2_scena1, scena2: crime2_scena2, scena3: crime2_scena3, scena4: crime2_scena4, scena5: crime2_scena5, scena6: crime2_scena6, scena7: crime2_scena7 };
-    const titoliOpera1 = { intro: "INTRO · L'ombra sul tappeto", scena1: "SCENA 1 · Interrogatorio", scena2: "SCENA 2 · L'uomo dal pastrano", scena3: "SCENA 3 · La chiave", scena4: "SCENA 4 · Telefonata", scena5: "SCENA 5 · Colpo di scena", scena6: "SCENA 6 · L'ispettore", scena7: "SCENA 7 · Verità" };
-    const titoliOpera2 = { intro: "INTRO · vagone 7", scena1: "SCENA 1 · Specchietto", scena2: "SCENA 2 · La donna velata", scena3: "SCENA 3 · Congiura", scena4: "SCENA 4 · Seconda morte", scena5: "SCENA 5 · Tunnel", scena6: "SCENA 6 · Testamento", scena7: "SCENA 7 · Confessione" };
+    const titoliOpera1 = { intro: "INTRO · Crime Express", scena1: "SCENA 1 · Il Delitto", scena2: "SCENA 2 · Il Foglietto", scena3: "SCENA 3 · La Falsa Pista", scena4: "SCENA 4 · La Relazione Segreta", scena5: "SCENA 5 · Finale", scena6: "SCENA 6 · Finale", scena7: "SCENA 7 · Finale" };
+    const titoliOpera2 = { intro: "INTRO · Crime Express", scena1: "SCENA 1 · Il Delitto", scena2: "SCENA 2 · Il Foglietto", scena3: "SCENA 3 · La Falsa Pista", scena4: "SCENA 4 · La Relazione Segreta", scena5: "SCENA 5 · Finale", scena6: "SCENA 6 · Finale", scena7: "SCENA 7 · Finale" };
 
     // --- AUDIO (stessa logica) -----
     let currentAudio = null;
@@ -493,7 +695,7 @@ Sipario. Fumo. Titoli di coda.`;
         const titoli = opera === 1 ? titoliOpera1 : titoliOpera2;
         const testo = testi[sceneKey];
         if (!testo) return;
-        document.getElementById('readingContainer').innerHTML = `<div style="margin-bottom:1rem;border-left:4px solid #c92a2a;padding-left:1rem"><strong style="font-size:1.2rem;">🚂 ${titoli[sceneKey]}</strong><br><span style="font-size:0.7rem;">${opera === 1 ? "CASO N.1 · L'OMBRA" : "CASO N.2 · SILENZIO"}</span></div><div style="white-space:pre-wrap; font-family:'Courier New'">${testo.replace(/[&<>]/g, m => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;' }[m]))}</div>`;
+        document.getElementById('readingContainer').innerHTML = `<div style="margin-bottom:1rem;border-left:4px solid #c92a2a;padding-left:1rem"><strong style="font-size:1.2rem;">🚂 ${titoli[sceneKey]}</strong><br><span style="font-size:0.7rem;">${opera === 1 ? "CASO N.1 · Crime Express" : "CASO N.1 · Crime Express"}</span></div><div style="white-space:pre-wrap; font-family:'Courier New'">${testo.replace(/[&<>]/g, m => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;' }[m]))}</div>`;
         playAudio(sceneKey);
     }
     // UI
