@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Assassinio sul Treno - Lucia Ferrari</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #e8e0d0;
+            padding: 20px;
+            font-family: 'Georgia', 'Times New Roman', serif;
+        }
+        
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto 20px auto;
+            padding: 18mm 18mm;
+            background: #fef8ed;
+            box-sizing: border-box;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            font-size: 11pt;
+            line-height: 1.5;
+            color: #1a1a1a;
+            text-align: left;
+        }
+        
+        @media print {
+            body {
+                background: #e8e0d0;
+                padding: 0;
+            }
+            .page {
+                margin: 0;
+                box-shadow: none;
+                page-break-after: always;
+                background: #fef8ed;
+            }
+            .no-print {
+                display: none;
+            }
+            .choice button {
+                display: none;
+            }
+            .choice {
+                border-left: 2px solid #8b0000;
+                padding-left: 8px;
+            }
+        }
+        
+        .header {
+            margin-bottom: 25px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #1a1a1a;
+            text-align: right;
+            font-family: 'Georgia', 'Times New Roman', serif;
+        }
+        .ref-number {
+            font-size: 9pt;
+            font-weight: normal;
+            letter-spacing: 1px;
+            color: #5c2e2e;
+            font-style: italic;
+        }
+        .ref-date {
+            font-size: 9pt;
+            margin-top: 4px;
+            color: #5c2e2e;
+            font-style: italic;
+        }
+        
+        .scene-title {
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin: 28px 0 20px 0;
+            font-size: 14pt;
+            text-align: center;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-style: normal;
+        }
+        
+        .action {
+            margin: 12px 0;
+            color: #3a3a3a;
+            text-align: left;
+            font-style: italic;
+            font-size: 10.5pt;
+            font-family: 'Georgia', 'Times New Roman', serif;
+        }
+        
+        .dialogue {
+            margin: 12px 0 12px 20px;
+            text-align: left;
+            font-style: normal;
+        }
+        
+        .speaker {
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #1a1a1a;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-style: normal;
+            font-size: 10.5pt;
+        }
+        
+        .pause {
+            margin: 16px 0;
+            text-align: center;
+            font-style: normal;
+        }
+        
+        .pause-dots {
+            font-size: 18pt;
+            letter-spacing: 8px;
+            color: #555;
+            font-weight: bold;
+        }
+        
+        .choices {
+            margin: 32px 0 20px 0;
+            padding: 18px;
+            background: #f5efe0;
+            border-left: 3px solid #8b0000;
+            border-right: 1px solid #d4c9b0;
+            border-top: 1px solid #d4c9b0;
+            border-bottom: 1px solid #d4c9b0;
+            text-align: left;
+        }
+        
+        .choices-title {
+            font-weight: bold;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 10pt;
+            color: #1a1a1a;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            text-align: center;
+        }
+        
+        .choice {
+            margin: 10px 0;
+            padding: 5px 0 5px 12px;
+            border-left: 2px solid #8b0000;
+        }
+        
+        .choice button {
+            background: none;
+            border: none;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-size: 10.5pt;
+            color: #8b0000;
+            cursor: pointer;
+            text-align: left;
+            padding: 0;
+            margin: 0;
+            font-weight: normal;
+            font-style: italic;
+        }
+        
+        .choice button:hover {
+            color: #cc3333;
+            text-decoration: underline;
+        }
+        
+        .default-choice {
+            margin-top: 14px;
+            padding-top: 8px;
+            border-top: 1px dashed #b0a890;
+            color: #777;
+            font-style: italic;
+            font-size: 9.5pt;
+        }
+        
+        .signature {
+            margin-top: 45px;
+            text-align: right;
+            border-top: 1px solid #1a1a1a;
+            padding-top: 12px;
+            font-size: 9pt;
+            font-style: italic;
+            font-family: 'Georgia', 'Times New Roman', serif;
+        }
+        
+        .signature-line {
+            margin-top: 8px;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            letter-spacing: 2px;
+            font-style: normal;
+        }
+        
+        .page-number {
+            position: absolute;
+            bottom: 15mm;
+            right: 18mm;
+            font-size: 9pt;
+            color: #999;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-style: italic;
+        }
+        
+        .cover {
+            text-align: center;
+            padding-top: 80px;
+        }
+        
+        .stamp {
+            font-size: 9pt;
+            letter-spacing: 4px;
+            border: 1px solid #1a1a1a;
+            display: inline-block;
+            padding: 4px 16px;
+            margin-bottom: 50px;
+            font-weight: normal;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-style: italic;
+        }
+        
+        .cover-title {
+            font-size: 28pt;
+            font-weight: bold;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            margin-top: 30px;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-style: normal;
+        }
+        
+        .cover-subtitle {
+            font-size: 12pt;
+            margin: 20px 0 40px 0;
+            letter-spacing: 2px;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-style: italic;
+        }
+        
+        .cover-line {
+            width: 80px;
+            margin: 30px auto;
+            border-top: 1px solid #1a1a1a;
+        }
+        
+        .cover-name {
+            font-size: 16pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 40px;
+            letter-spacing: 2px;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-style: normal;
+        }
+        
+        .cover-role {
+            font-size: 10pt;
+            margin-top: 8px;
+            color: #5c2e2e;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-style: italic;
+        }
+        
+        .no-print {
+            text-align: center;
+            margin-bottom: 25px;
+            position: sticky;
+            top: 10px;
+            z-index: 100;
+        }
+        
+        .no-print button {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-size: 11pt;
+            padding: 10px 24px;
+            background: #1a1a1a;
+            color: #fef8ed;
+            border: 1px solid #1a1a1a;
+            cursor: pointer;
+            font-weight: normal;
+            letter-spacing: 1px;
+        }
+        
+        .no-print button:hover {
+            background: #3a3a3a;
+        }
+        
+        @page {
+            size: A4;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="no-print">
+    <button onclick="window.print()">STAMPA / PDF</button>
+</div>
+
+<!-- COPERTINA -->
+<div class="page">
+    <div class="cover">
+        <div class="stamp">CLASSIFICATO</div>
+        <div class="cover-title">ASSASSINIO</div>
+        <div class="cover-title">SUL TRENO</div>
+        <div class="cover-line"></div>
+        <div class="cover-subtitle">libretto di</div>
+        <div class="cover-name">LUCIA FERRARI</div>
+        <div class="cover-role">Ispettore della polizia giudiziaria</div>
+        <div class="cover-line"></div>
+        <div style="margin-top: 50px; font-size: 9pt; letter-spacing: 2px; font-style: italic;">ARCHIVIO CENTRALE</div>
+        <div style="font-size: 9pt; font-style: italic;">Dossier n. 2024-01</div>
+    </div>
+    <div class="page-number">1</div>
+</div>
+
+<!-- SCENA 1 -->
+<div class="page" id="scena1">
+    <div class="header">
+        <div class="ref-number">RAPPORTO INVESTIGATIVO N. 2024-01/01</div>
+        <div class="ref-date">DATA: 23 novembre 2024 — notturno</div>
+    </div>
+
+    <div class="scene-title">SCENA 1 — IL DELITTO</div>
+
+    <div class="action">
+        L'Espresso delle Nuvole è fermo sui binari. Fuori, la nebbia avvolge le montagne. All'interno dello scompartimento della vittima, il corpo di Giovanni Alberti giace sul pavimento.
+    </div>
+
+    <div class="action">
+        I due investigatori entrano nella scena.
+    </div>
+
+    <div class="action">
+        "Chi siete voi? Cosa ci fate qui?" chiede la donna, con voce rotta dal pianto.
+    </div>
+
+    <div class="dialogue">
+        <span class="speaker">LUCIA FERRARI.</span> "Lucia Ferrari, ispettore della polizia giudiziaria. Lui è Andrea Russo, investigatore privato. Siamo stati incaricati di seguire questo caso. E lei chi è?"
+    </div>
+
+    <div class="action">
+        "Sono la signora Alberti. La moglie. Voglio sapere chi ha fatto questo a mio marito."
+    </div>
+
+    <div class="pause">
+        <span class="pause-dots">• • •</span>
+    </div>
+
+    <div class="action">
+        La donna si allontana lentamente. Poi esce senza parlare. Il treno scricchiola. Un lampo illumina il cielo.
+    </div>
+
+    <div class="dialogue">
+        <span class="speaker">LUCIA FERRARI.</span> "La finestra è aperta, ma fuori c'è la nebbia e fa freddo. Nessuno aprirebbe la finestra in una notte come questa. Ho sentito dei passi nel corridoio poco fa, come se qualcuno ci stesse aspettando prima di scappare."
+    </div>
+
+    <div class="pause">
+        <span class="pause-dots">• • •</span>
+    </div>
+
+    <div class="action">
+        Ti avvicini alla finestra e osservi il davanzale. Ti chini e raccogli qualcosa da terra.
+    </div>
+
+    <div class="dialogue">
+        <span class="speaker">LUCIA FERRARI.</span> "Guarda qui. Un fazzoletto di pizzo. Ha le iniziali ricamate: R.F. Non è della vittima, né della moglie. Qualcun altro era qui. Una donna."
+    </div>
+
+    <div class="action">
+        Andrea si avvicina al letto della vittima e osserva il cuscino.
+    </div>
+
+    <div class="pause">
+        <span class="pause-dots">• • •</span>
+    </div>
+
+    <div class="action">
+        Un tuono squarcia il silenzio. Le luci del treno tremolano. Si sentono passi frettolosi nel corridoio.
+    </div>
+
+    <div class="dialogue">
+        <span class="speaker">LUCIA FERRARI.</span> "Hai sentito? Qualcuno ci stava spiando. Appena siamo entrati, si è fermato davanti alla porta. Poi è scappato. Forse l'assassino, forse qualcuno che sa qualcosa e ha paura."
+    </div>
+
+    <div class="pause">
+        <span class="pause-dots">• • •</span>
+    </div>
+
+    <div class="choices">
+        <div class="choices-title">decisione operativa</div>
+        <div class="choice"><button onclick="location.href='#scena2'">Perquisiamo lo scompartimento → SCENA 2</button></div>
+        <div class="choice"><button onclick="location.href='#scena3'">Blocchiamo le uscite → SCENA 3</button></div>
+        <div class="default-choice">[Default] Tempo scaduto → SCENA 3</div>
+    </div>
+
+    <div class="signature">
+        <div>Redatto da: LUCIA FERRARI</div>
+        <div class="signature-line">___________________</div>
+    </div>
+    <div class="page-number">2</div>
+</div>
+
+<!-- SCENA 2 -->
+<div class="page" id="scena2">
+    <div class="header">
+        <div class="ref-number">RAPPORTO INVESTIGATIVO N. 2024-01/02</div>
+        <div class="ref-date">DATA: 23 novembre 2024 — notturno</div>
+    </div>
+
+    <div class="scene-title">SCENA 2 — IL FOGLIETTO</div>
+
+    <div class="action">
+        Lo scompartimento di Giovanni Alberti è stato perquisito. Nascosti in vari punti del vagone, diversi pezzi di carta strappata.
+    </div>
+
+    <div class="pause">
+        <span class="pause-dots">• • •</span>
+    </div>
+
+    <div class="action">
+        I SEI FRAMMENTI:
+    </div>
+
+    <div class="action" style="font-family: 'Courier New', monospace; margin-left: 20px; font-style: normal;">
+        «el ricat»<br>
+        «Ven»<br>
+        «ti parlo.»<br>
+        «tro domani. Altrimen»<br>
+        «to. 200.000 en»<br>
+        «turi sa d»
+    </div>
+
+    <div class="pause">
+        <span class="pause-dots">• • •</span>
+    </div>
+
+    <div class="dialogue">
+        <span class="speaker">LUCIA FERRARI.</span> "Proviamo a unirli come un puzzle. Cerchiamo le parole che si incastrano."
+    </div>
+
+    <div class="choices">
+        <div class="choices-title">decisione operativa</div>
+        <div class="choice"><button onclick="alert('VAI A SCENA 5 (FINE OK)')">Perquisiamo lo scompartimento di Venturi → SCENA 5</button></div>
+        <div class="choice"><button onclick="alert('VAI A SCENA 4 (RELAZIONE SEGRETA)')">Arrestiamo Venturi → SCENA 4</button></div>
+        <div class="default-choice">[Default] Tempo scaduto → SCENA 4</div>
+    </div>
+
+    <div class="signature">
+        <div>Redatto da: LUCIA FERRARI</div>
+        <div class="signature-line">___________________</div>
+    </div>
+    <div class="page-number">3</div>
+</div>
+
+<!-- SCENA 3 -->
+<div class="page" id="scena3">
+    <div class="header">
+        <div class="ref-number">RAPPORTO INVESTIGATIVO N. 2024-01/03</div>
+        <div class="ref-date">DATA: 23 novembre 2024 — notturno</div>
+    </div>
+
+    <div class="scene-title">SCENA 3 — LA FALSA PISTA</div>
+
+    <div class="action">
+        Hai deciso di bloccare le uscite del treno. Il tempo passa. La tensione sale. La nebbia fuori si è fatta più fitta.
+    </div>
+
+    <div class="dialogue">
+        <span class="speaker">LUCIA FERRARI.</span> "Abbiamo bloccato tutte le uscite e interrogato mezza dozzina di passeggeri. Nessuno ha visto nulla. La signora con le iniziali R.F. si è rivelata essere una vecchia amica di Alberti, nessun legame con il delitto. Il suo alibi è solido. Abbiamo perso ore preziose. Il taccuino potrebbe essere andato perduto per sempre."
+    </div>
+
+    <div class="pause">
+        <span class="pause-dots">• • •</span>
+    </div>
+
+    <div class="choices">
+        <div class="choices-title">decisione operativa</div>
+        <div class="choice"><button onclick="location.href='#scena2'">Torniamo indietro → SCENA 2</button></div>
+        <div class="choice"><button onclick="alert('VAI A SCENA 6 (FINE KO)')">Continuiamo su questa strada → SCENA 6</button></div>
+        <div class="default-choice">[Default] Tempo scaduto → SCENA 6</div>
+    </div>
+
+    <div class="signature">
+        <div>Redatto da: LUCIA FERRARI</div>
+        <div class="signature-line">___________________</div>
+    </div>
+    <div class="page-number">4</div>
+</div>
+
+</body>
+</html>
