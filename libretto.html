@@ -266,6 +266,27 @@
             font-style: italic;
         }
         
+        .start-button {
+            display: inline-block;
+            margin-top: 50px;
+            padding: 12px 32px;
+            background: #8b0000;
+            color: #fef8ed;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-size: 13pt;
+            font-weight: bold;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            cursor: pointer;
+            border: 1px solid #8b0000;
+            transition: all 0.3s ease;
+        }
+        
+        .start-button:hover {
+            background: #cc3333;
+            border-color: #cc3333;
+        }
+        
         .no-print {
             text-align: center;
             margin-bottom: 25px;
@@ -298,22 +319,22 @@
         .hidden-scene {
             display: none;
         }
+        
+        .error-message {
+            color: #8b0000;
+            text-align: center;
+            padding: 50px;
+            font-style: italic;
+        }
     </style>
 </head>
 <body>
 
 <div class="no-print">
-    <button onclick="window.print()">STAMPA / PDF</button>
-    <button onclick="showScene(1)" style="margin-left: 10px;">📖 SCENA 1</button>
-    <button onclick="showScene(2)" style="margin-left: 5px;">📖 SCENA 2</button>
-    <button onclick="showScene(3)" style="margin-left: 5px;">📖 SCENA 3</button>
-    <button onclick="showScene(4)" style="margin-left: 5px;">📖 SCENA 4</button>
-    <button onclick="showScene(5)" style="margin-left: 5px;">📖 SCENA 5</button>
-    <button onclick="showScene(6)" style="margin-left: 5px;">📖 SCENA 6</button>
-    <button onclick="showScene(7)" style="margin-left: 5px;">📖 SCENA 7</button>
-    <button onclick="showCover()" style="margin-left: 10px;">🏠 COPERTINA</button>
+    <button onclick="window.print()">🖨️ STAMPA / PDF</button>
 </div>
 
+<!-- COPERTINA -->
 <div id="coverPage" class="page">
     <div class="cover">
         <div class="stamp">CLASSIFICATO</div>
@@ -326,6 +347,7 @@
         <div class="cover-line"></div>
         <div style="margin-top: 50px; font-size: 9pt; letter-spacing: 2px; font-style: italic;">ARCHIVIO CENTRALE</div>
         <div style="font-size: 9pt; font-style: italic;">Dossier n. 2024-01</div>
+        <div class="start-button" onclick="startGame()">▶ INIZIA</div>
     </div>
     <div class="page-number">1</div>
 </div>
@@ -334,16 +356,18 @@
 
 <script>
     let scenesData = {};
+    let scenesLoaded = false;
 
     async function loadScenes() {
         try {
             const response = await fetch('scene.txt');
+            if (!response.ok) throw new Error('File scene.txt non trovato');
             const text = await response.text();
             parseScenes(text);
+            scenesLoaded = true;
             buildAllScenes();
-            showCover();
         } catch (error) {
-            document.getElementById('sceneContainer').innerHTML = '<div class="page"><div class="action" style="color:#8b0000;">⚠️ Errore: file scene.txt non trovato. Assicurati che sia nella stessa cartella di questo file HTML.</div></div>';
+            document.getElementById('sceneContainer').innerHTML = '<div class="page"><div class="error-message">⚠️ Errore: file scene.txt non trovato.<br>Assicurati che sia nella stessa cartella di questo file HTML.</div></div>';
             console.error(error);
         }
     }
@@ -387,6 +411,9 @@
                         currentScene.content.push({ type: 'dialogue', speaker: '', text: dialogText });
                     }
                 }
+                else if (line === '...') {
+                    currentScene.content.push({ type: 'pause' });
+                }
                 else if (line.startsWith('scelta:')) {
                     const choiceText = line.substring(7).trim();
                     const arrowIndex = choiceText.indexOf('→');
@@ -418,7 +445,6 @@
         div.className = 'page hidden-scene';
         div.id = 'scena' + scene.id;
         
-        // Header
         const header = document.createElement('div');
         header.className = 'header';
         const refNumber = document.createElement('div');
@@ -432,13 +458,11 @@
         header.appendChild(refDate);
         div.appendChild(header);
         
-        // Titolo
         const title = document.createElement('div');
         title.className = 'scene-title';
         title.textContent = scene.title;
         div.appendChild(title);
         
-        // Contenuto
         for (let item of scene.content) {
             if (item.type === 'action') {
                 const p = document.createElement('div');
@@ -458,21 +482,17 @@
                     d.textContent = '"' + item.text + '"';
                 }
                 div.appendChild(d);
+            } else if (item.type === 'pause') {
+                const pauseDiv = document.createElement('div');
+                pauseDiv.className = 'pause';
+                const dotsSpan = document.createElement('span');
+                dotsSpan.className = 'pause-dots';
+                dotsSpan.textContent = '• • •';
+                pauseDiv.appendChild(dotsSpan);
+                div.appendChild(pauseDiv);
             }
         }
         
-        // Puntini di separazione se ci sono scelte
-        if (scene.choices.length > 0) {
-            const pause = document.createElement('div');
-            pause.className = 'pause';
-            const dots = document.createElement('span');
-            dots.className = 'pause-dots';
-            dots.textContent = '• • •';
-            pause.appendChild(dots);
-            div.appendChild(pause);
-        }
-        
-        // Riquadro scelte
         if (scene.choices.length > 0) {
             const choicesBox = document.createElement('div');
             choicesBox.className = 'choices';
@@ -501,13 +521,11 @@
             div.appendChild(choicesBox);
         }
         
-        // Firma
         const signature = document.createElement('div');
         signature.className = 'signature';
         signature.innerHTML = '<div>Redatto da: LUCIA FERRARI</div><div class="signature-line">___________________</div>';
         div.appendChild(signature);
         
-        // Numero pagina
         const pageNum = document.createElement('div');
         pageNum.className = 'page-number';
         pageNum.textContent = '— ' + (scene.id + 1) + ' —';
@@ -529,7 +547,21 @@
             targetScene.classList.remove('hidden-scene');
             targetScene.scrollIntoView({ behavior: 'smooth' });
         } else {
-            alert('SCENA ' + sceneId + ' non trovata. Verifica che sia presente nel file scene.txt');
+            alert('SCENA ' + sceneId + ' non trovata. Verifica il file scene.txt');
+        }
+    }
+
+    function startGame() {
+        if (scenesLoaded && scenesData[1]) {
+            showScene(1);
+        } else if (!scenesLoaded) {
+            alert('Caricamento scene in corso. Attendi qualche secondo...');
+            setTimeout(() => {
+                if (scenesData[1]) showScene(1);
+                else alert('Errore: scene non caricate. Verifica il file scene.txt');
+            }, 1000);
+        } else {
+            alert('Scena 1 non trovata nel file scene.txt');
         }
     }
 
@@ -544,6 +576,7 @@
 
     window.showScene = showScene;
     window.showCover = showCover;
+    window.startGame = startGame;
     
     loadScenes();
 </script>
