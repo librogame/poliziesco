@@ -304,7 +304,14 @@
 
 <div class="no-print">
     <button onclick="window.print()">STAMPA / PDF</button>
-    <button onclick="showCover()" style="margin-left: 10px;">📖 COPERTINA</button>
+    <button onclick="showScene(1)" style="margin-left: 10px;">📖 SCENA 1</button>
+    <button onclick="showScene(2)" style="margin-left: 5px;">📖 SCENA 2</button>
+    <button onclick="showScene(3)" style="margin-left: 5px;">📖 SCENA 3</button>
+    <button onclick="showScene(4)" style="margin-left: 5px;">📖 SCENA 4</button>
+    <button onclick="showScene(5)" style="margin-left: 5px;">📖 SCENA 5</button>
+    <button onclick="showScene(6)" style="margin-left: 5px;">📖 SCENA 6</button>
+    <button onclick="showScene(7)" style="margin-left: 5px;">📖 SCENA 7</button>
+    <button onclick="showCover()" style="margin-left: 10px;">🏠 COPERTINA</button>
 </div>
 
 <div id="coverPage" class="page">
@@ -327,7 +334,6 @@
 
 <script>
     let scenesData = {};
-    let maxScene = 0;
 
     async function loadScenes() {
         try {
@@ -337,7 +343,8 @@
             buildAllScenes();
             showCover();
         } catch (error) {
-            document.getElementById('sceneContainer').innerHTML = '<div class="page"><div class="action">Errore: file scene.txt non trovato. Assicurati che sia nella stessa cartella di libretto.html</div></div>';
+            document.getElementById('sceneContainer').innerHTML = '<div class="page"><div class="action" style="color:#8b0000;">⚠️ Errore: file scene.txt non trovato. Assicurati che sia nella stessa cartella di questo file HTML.</div></div>';
+            console.error(error);
         }
     }
 
@@ -360,7 +367,6 @@
                         defaultScene: null
                     };
                     scenesData[currentScene.id] = currentScene;
-                    if (currentScene.id > maxScene) maxScene = currentScene.id;
                 }
             }
             else if (currentScene) {
@@ -371,7 +377,7 @@
                     currentScene.content.push({ type: 'action', text: line.substring(6).trim() });
                 }
                 else if (line.startsWith('dialogo:')) {
-                    const dialogText = line.substring(8).trim();
+                    let dialogText = line.substring(8).trim();
                     const firstColon = dialogText.indexOf(':');
                     if (firstColon !== -1) {
                         const speaker = dialogText.substring(0, firstColon).trim();
@@ -401,11 +407,9 @@
         const container = document.getElementById('sceneContainer');
         container.innerHTML = '';
         
-        for (let id = 2; id <= maxScene; id++) {
-            if (scenesData[id]) {
-                const sceneDiv = createSceneDiv(scenesData[id]);
-                container.appendChild(sceneDiv);
-            }
+        for (let id in scenesData) {
+            const sceneDiv = createSceneDiv(scenesData[id]);
+            container.appendChild(sceneDiv);
         }
     }
 
@@ -419,7 +423,8 @@
         header.className = 'header';
         const refNumber = document.createElement('div');
         refNumber.className = 'ref-number';
-        refNumber.textContent = 'RAPPORTO INVESTIGATIVO N. 2024-01/0' + scene.id;
+        const numStr = scene.id < 10 ? '0' + scene.id : scene.id;
+        refNumber.textContent = 'RAPPORTO INVESTIGATIVO N. 2024-01/' + numStr;
         const refDate = document.createElement('div');
         refDate.className = 'ref-date';
         refDate.textContent = 'DATA: 23 novembre 2024 — notturno';
@@ -512,28 +517,25 @@
     }
 
     function showScene(sceneId) {
-        // Nascondi copertina
         document.getElementById('coverPage').style.display = 'none';
         
-        // Nascondi tutte le scene
-        for (let id = 2; id <= maxScene; id++) {
+        for (let id in scenesData) {
             const scene = document.getElementById('scena' + id);
             if (scene) scene.classList.add('hidden-scene');
         }
         
-        // Mostra la scena richiesta
         const targetScene = document.getElementById('scena' + sceneId);
         if (targetScene) {
             targetScene.classList.remove('hidden-scene');
             targetScene.scrollIntoView({ behavior: 'smooth' });
         } else {
-            alert('SCENA ' + sceneId + ' non ancora implementata nel file scene.txt');
+            alert('SCENA ' + sceneId + ' non trovata. Verifica che sia presente nel file scene.txt');
         }
     }
 
     function showCover() {
         document.getElementById('coverPage').style.display = 'block';
-        for (let id = 2; id <= maxScene; id++) {
+        for (let id in scenesData) {
             const scene = document.getElementById('scena' + id);
             if (scene) scene.classList.add('hidden-scene');
         }
