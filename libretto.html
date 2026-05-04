@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Assassinio sul Treno - Lucia Ferrari</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #e8e0d0;
+            padding: 20px;
+            font-family: 'Georgia', 'Times New Roman', serif;
+        }
+        
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto 20px auto;
+            padding: 18mm 18mm;
+            background: #fef8ed;
+            box-sizing: border-box;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            font-size: 11pt;
+            line-height: 1.5;
+            color: #1a1a1a;
+            text-align: left;
+        }
+        
+        @media print {
+            body {
+                background: #e8e0d0;
+                padding: 0;
+            }
+            .page {
+                margin: 0;
+                box-shadow: none;
+                page-break-after: always;
+                background: #fef8ed;
+            }
+            .no-print {
+                display: none;
+            }
+            .choice button {
+                display: none;
+            }
+            .choice {
+                border-left: 2px solid #8b0000;
+                padding-left: 8px;
+            }
+        }
+        
+        .header {
+            margin-bottom: 25px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #1a1a1a;
+            text-align: right;
+            font-family: 'Georgia', 'Times New Roman', serif;
+        }
+        .ref-number {
+            font-size: 9pt;
+            font-weight: normal;
+            letter-spacing: 1px;
+            color: #5c2e2e;
+            font-style: italic;
+        }
+        .ref-date {
+            font-size: 9pt;
+            margin-top: 4px;
+            color: #5c2e2e;
+            font-style: italic;
+        }
+        
+        .scene-title {
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin: 28px 0 20px 0;
+            font-size: 14pt;
+            text-align: center;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-style: normal;
+        }
+        
+        .action {
+            margin: 12px 0;
+            color: #3a3a3a;
+            text-align: left;
+            font-style: italic;
+            font-size: 10.5pt;
+            font-family: 'Georgia', 'Times New Roman', serif;
+        }
+        
+        .dialogue {
+            margin: 12px 0 12px 20px;
+            text-align: left;
+            font-style: normal;
+        }
+        
+        .speaker {
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #1a1a1a;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-style: normal;
+            font-size: 10.5pt;
+        }
+        
+        .pause {
+            margin: 16px 0;
+            text-align: center;
+            font-style: normal;
+        }
+        
+        .pause-dots {
+            font-size: 18pt;
+            letter-spacing: 8px;
+            color: #555;
+            font-weight: bold;
+        }
+        
+        .choices {
+            margin: 32px 0 20px 0;
+            padding: 18px;
+            background: #f5efe0;
+            border-left: 3px solid #8b0000;
+            border-right: 1px solid #d4c9b0;
+            border-top: 1px solid #d4c9b0;
+            border-bottom: 1px solid #d4c9b0;
+            text-align: left;
+        }
+        
+        .choices-title {
+            font-weight: bold;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 10pt;
+            color: #1a1a1a;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            text-align: center;
+        }
+        
+        .choice {
+            margin: 10px 0;
+            padding: 5px 0 5px 12px;
+            border-left: 2px solid #8b0000;
+        }
+        
+        .choice button {
+            background: none;
+            border: none;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-size: 10.5pt;
+            color: #8b0000;
+            cursor: pointer;
+            text-align: left;
+            padding: 0;
+            margin: 0;
+            font-weight: normal;
+            font-style: italic;
+        }
+        
+        .choice button:hover {
+            color: #cc3333;
+            text-decoration: underline;
+        }
+        
+        .default-choice {
+            margin-top: 14px;
+            padding-top: 8px;
+            border-top: 1px dashed #b0a890;
+            color: #777;
+            font-style: italic;
+            font-size: 9.5pt;
+        }
+        
+        .signature {
+            margin-top: 45px;
+            text-align: right;
+            border-top: 1px solid #1a1a1a;
+            padding-top: 12px;
+            font-size: 9pt;
+            font-style: italic;
+            font-family: 'Georgia', 'Times New Roman', serif;
+        }
+        
+        .signature-line {
+            margin-top: 8px;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            letter-spacing: 2px;
+            font-style: normal;
+        }
+        
+        .page-number {
+            position: absolute;
+            bottom: 15mm;
+            right: 18mm;
+            font-size: 9pt;
+            color: #999;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-style: italic;
+        }
+        
+        .cover {
+            text-align: center;
+            padding-top: 80px;
+        }
+        
+        .stamp {
+            font-size: 9pt;
+            letter-spacing: 4px;
+            border: 1px solid #1a1a1a;
+            display: inline-block;
+            padding: 4px 16px;
+            margin-bottom: 50px;
+            font-weight: normal;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-style: italic;
+        }
+        
+        .cover-title {
+            font-size: 28pt;
+            font-weight: bold;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            margin-top: 30px;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-style: normal;
+        }
+        
+        .cover-subtitle {
+            font-size: 12pt;
+            margin: 20px 0 40px 0;
+            letter-spacing: 2px;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-style: italic;
+        }
+        
+        .cover-line {
+            width: 80px;
+            margin: 30px auto;
+            border-top: 1px solid #1a1a1a;
+        }
+        
+        .cover-name {
+            font-size: 16pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 40px;
+            letter-spacing: 2px;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-style: normal;
+        }
+        
+        .cover-role {
+            font-size: 10pt;
+            margin-top: 8px;
+            color: #5c2e2e;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-style: italic;
+        }
+        
+        .no-print {
+            text-align: center;
+            margin-bottom: 25px;
+            position: sticky;
+            top: 10px;
+            z-index: 100;
+        }
+        
+        .no-print button {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-size: 11pt;
+            padding: 10px 24px;
+            background: #1a1a1a;
+            color: #fef8ed;
+            border: 1px solid #1a1a1a;
+            cursor: pointer;
+            font-weight: normal;
+            letter-spacing: 1px;
+        }
+        
+        .no-print button:hover {
+            background: #3a3a3a;
+        }
+        
+        @page {
+            size: A4;
+            margin: 0;
+        }
+        
+        .hidden-scene {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="no-print">
+    <button onclick="window.print()">STAMPA / PDF</button>
+    <button onclick="showCover()" style="margin-left: 10px;">📖 COPERTINA</button>
+</div>
+
+<div id="coverPage" class="page">
+    <div class="cover">
+        <div class="stamp">CLASSIFICATO</div>
+        <div class="cover-title">ASSASSINIO</div>
+        <div class="cover-title">SUL TRENO</div>
+        <div class="cover-line"></div>
+        <div class="cover-subtitle">libretto di</div>
+        <div class="cover-name">LUCIA FERRARI</div>
+        <div class="cover-role">Ispettore della polizia giudiziaria</div>
+        <div class="cover-line"></div>
+        <div style="margin-top: 50px; font-size: 9pt; letter-spacing: 2px; font-style: italic;">ARCHIVIO CENTRALE</div>
+        <div style="font-size: 9pt; font-style: italic;">Dossier n. 2024-01</div>
+    </div>
+    <div class="page-number">1</div>
+</div>
+
+<div id="sceneContainer"></div>
+
+<script>
+    let scenesData = {};
+    let maxScene = 0;
+
+    async function loadScenes() {
+        try {
+            const response = await fetch('scene.txt');
+            const text = await response.text();
+            parseScenes(text);
+            buildAllScenes();
+            showCover();
+        } catch (error) {
+            document.getElementById('sceneContainer').innerHTML = '<div class="page"><div class="action">Errore: file scene.txt non trovato. Assicurati che sia nella stessa cartella di libretto.html</div></div>';
+        }
+    }
+
+    function parseScenes(content) {
+        const lines = content.split('\n');
+        let currentScene = null;
+        
+        for (let line of lines) {
+            line = line.trim();
+            if (line === '') continue;
+            
+            if (line.startsWith('[SCENA ') && line.endsWith(']')) {
+                const match = line.match(/\[SCENA (\d+)\]/);
+                if (match) {
+                    currentScene = {
+                        id: parseInt(match[1]),
+                        title: '',
+                        content: [],
+                        choices: [],
+                        defaultScene: null
+                    };
+                    scenesData[currentScene.id] = currentScene;
+                    if (currentScene.id > maxScene) maxScene = currentScene.id;
+                }
+            }
+            else if (currentScene) {
+                if (line.startsWith('titolo:')) {
+                    currentScene.title = line.substring(7).trim();
+                }
+                else if (line.startsWith('testo:')) {
+                    currentScene.content.push({ type: 'action', text: line.substring(6).trim() });
+                }
+                else if (line.startsWith('dialogo:')) {
+                    const dialogText = line.substring(8).trim();
+                    const firstColon = dialogText.indexOf(':');
+                    if (firstColon !== -1) {
+                        const speaker = dialogText.substring(0, firstColon).trim();
+                        const text = dialogText.substring(firstColon + 1).trim();
+                        currentScene.content.push({ type: 'dialogue', speaker: speaker, text: text });
+                    } else {
+                        currentScene.content.push({ type: 'dialogue', speaker: '', text: dialogText });
+                    }
+                }
+                else if (line.startsWith('scelta:')) {
+                    const choiceText = line.substring(7).trim();
+                    const arrowIndex = choiceText.indexOf('→');
+                    if (arrowIndex !== -1) {
+                        const label = choiceText.substring(0, arrowIndex).trim();
+                        const target = parseInt(choiceText.substring(arrowIndex + 1).trim());
+                        currentScene.choices.push({ label: label, target: target });
+                    }
+                }
+                else if (line.startsWith('default:')) {
+                    currentScene.defaultScene = parseInt(line.substring(8).trim());
+                }
+            }
+        }
+    }
+
+    function buildAllScenes() {
+        const container = document.getElementById('sceneContainer');
+        container.innerHTML = '';
+        
+        for (let id = 2; id <= maxScene; id++) {
+            if (scenesData[id]) {
+                const sceneDiv = createSceneDiv(scenesData[id]);
+                container.appendChild(sceneDiv);
+            }
+        }
+    }
+
+    function createSceneDiv(scene) {
+        const div = document.createElement('div');
+        div.className = 'page hidden-scene';
+        div.id = 'scena' + scene.id;
+        
+        // Header
+        const header = document.createElement('div');
+        header.className = 'header';
+        const refNumber = document.createElement('div');
+        refNumber.className = 'ref-number';
+        refNumber.textContent = 'RAPPORTO INVESTIGATIVO N. 2024-01/0' + scene.id;
+        const refDate = document.createElement('div');
+        refDate.className = 'ref-date';
+        refDate.textContent = 'DATA: 23 novembre 2024 — notturno';
+        header.appendChild(refNumber);
+        header.appendChild(refDate);
+        div.appendChild(header);
+        
+        // Titolo
+        const title = document.createElement('div');
+        title.className = 'scene-title';
+        title.textContent = scene.title;
+        div.appendChild(title);
+        
+        // Contenuto
+        for (let item of scene.content) {
+            if (item.type === 'action') {
+                const p = document.createElement('div');
+                p.className = 'action';
+                p.textContent = item.text;
+                div.appendChild(p);
+            } else if (item.type === 'dialogue') {
+                const d = document.createElement('div');
+                d.className = 'dialogue';
+                if (item.speaker) {
+                    const speakerSpan = document.createElement('span');
+                    speakerSpan.className = 'speaker';
+                    speakerSpan.textContent = item.speaker + '.';
+                    d.appendChild(speakerSpan);
+                    d.appendChild(document.createTextNode(' "' + item.text + '"'));
+                } else {
+                    d.textContent = '"' + item.text + '"';
+                }
+                div.appendChild(d);
+            }
+        }
+        
+        // Puntini di separazione se ci sono scelte
+        if (scene.choices.length > 0) {
+            const pause = document.createElement('div');
+            pause.className = 'pause';
+            const dots = document.createElement('span');
+            dots.className = 'pause-dots';
+            dots.textContent = '• • •';
+            pause.appendChild(dots);
+            div.appendChild(pause);
+        }
+        
+        // Riquadro scelte
+        if (scene.choices.length > 0) {
+            const choicesBox = document.createElement('div');
+            choicesBox.className = 'choices';
+            const choicesTitle = document.createElement('div');
+            choicesTitle.className = 'choices-title';
+            choicesTitle.textContent = 'decisione operativa';
+            choicesBox.appendChild(choicesTitle);
+            
+            for (let choice of scene.choices) {
+                const choiceDiv = document.createElement('div');
+                choiceDiv.className = 'choice';
+                const btn = document.createElement('button');
+                btn.textContent = choice.label + ' → SCENA ' + choice.target;
+                btn.onclick = () => showScene(choice.target);
+                choiceDiv.appendChild(btn);
+                choicesBox.appendChild(choiceDiv);
+            }
+            
+            if (scene.defaultScene) {
+                const defaultDiv = document.createElement('div');
+                defaultDiv.className = 'default-choice';
+                defaultDiv.textContent = '[Default] Tempo scaduto → SCENA ' + scene.defaultScene;
+                choicesBox.appendChild(defaultDiv);
+            }
+            
+            div.appendChild(choicesBox);
+        }
+        
+        // Firma
+        const signature = document.createElement('div');
+        signature.className = 'signature';
+        signature.innerHTML = '<div>Redatto da: LUCIA FERRARI</div><div class="signature-line">___________________</div>';
+        div.appendChild(signature);
+        
+        // Numero pagina
+        const pageNum = document.createElement('div');
+        pageNum.className = 'page-number';
+        pageNum.textContent = '— ' + (scene.id + 1) + ' —';
+        div.appendChild(pageNum);
+        
+        return div;
+    }
+
+    function showScene(sceneId) {
+        // Nascondi copertina
+        document.getElementById('coverPage').style.display = 'none';
+        
+        // Nascondi tutte le scene
+        for (let id = 2; id <= maxScene; id++) {
+            const scene = document.getElementById('scena' + id);
+            if (scene) scene.classList.add('hidden-scene');
+        }
+        
+        // Mostra la scena richiesta
+        const targetScene = document.getElementById('scena' + sceneId);
+        if (targetScene) {
+            targetScene.classList.remove('hidden-scene');
+            targetScene.scrollIntoView({ behavior: 'smooth' });
+        } else {
+            alert('SCENA ' + sceneId + ' non ancora implementata nel file scene.txt');
+        }
+    }
+
+    function showCover() {
+        document.getElementById('coverPage').style.display = 'block';
+        for (let id = 2; id <= maxScene; id++) {
+            const scene = document.getElementById('scena' + id);
+            if (scene) scene.classList.add('hidden-scene');
+        }
+        document.getElementById('coverPage').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    window.showScene = showScene;
+    window.showCover = showCover;
+    
+    loadScenes();
+</script>
+</body>
+</html>

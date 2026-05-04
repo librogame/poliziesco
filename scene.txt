@@ -1,0 +1,52 @@
+[SCENA 2]
+titolo: SCENA 2 — IL FOGLIETTO
+testo: Lo scompartimento di Giovanni Alberti è stato perquisito. Nascosti in vari punti del vagone, diversi pezzi di carta strappata.
+testo: I SEI FRAMMENTI:
+testo: «el ricat»
+testo: «Ven»
+testo: «ti parlo.»
+testo: «tro domani. Altrimen»
+testo: «to. 200.000 en»
+testo: «turi sa d»
+dialogo: LUCIA FERRARI: Proviamo a unirli come un puzzle. Cerchiamo le parole che si incastrano.
+scelta: Perquisiamo lo scompartimento di Venturi → 5
+scelta: Arrestiamo Venturi → 4
+default: 4
+
+[SCENA 3]
+titolo: SCENA 3 — LA FALSA PISTA
+testo: Hai deciso di bloccare le uscite del treno. Il tempo passa. La tensione sale. La nebbia fuori si è fatta più fitta.
+dialogo: LUCIA FERRARI: Abbiamo bloccato tutte le uscite e interrogato mezza dozzina di passeggeri. Nessuno ha visto nulla. La signora con le iniziali R.F. si è rivelata essere una vecchia amica di Alberti, nessun legame con il delitto. Il suo alibi è solido. Abbiamo perso ore preziose. Il taccuino potrebbe essere andato perduto per sempre.
+scelta: Torniamo indietro → 2
+scelta: Continuiamo su questa strada → 6
+default: 6
+
+[SCENA 4]
+titolo: SCENA 4 — LA RELAZIONE SEGRETA
+testo: Hai deciso di arrestare Marco Venturi. L'uomo è stato portato in uno scompartimento vuoto. Entrate per interrogarlo.
+dialogo: LUCIA FERRARI: Signor Venturi, lei è in arresto per l'omicidio di Giovanni Alberti. Abbiamo il suo cognome sul foglietto strappato, abbiamo la cifra di 200.000, la scadenza di ieri sera. Ha qualcosa da dire?
+testo: Venturi alza lo sguardo. «Non sono stato io. Non avrei mai ucciso Alberti. Ok, è vero, mi ricattava. Voleva 200.000 per tacere. Dovevo consegnarglieli ieri sera, ma quando sono andato nel suo scompartimento... era già morto.»
+testo: Venturi esita. «C'era una donna. Roberta Fontana. La signora in rosso. Credo che sia stata lei. Ma non posso provarlo.»
+scelta: Seguiamo la pista di Venturi → 5
+scelta: Non crediamo a Venturi → 7
+default: 7
+
+[SCENA 5]
+titolo: FINE OK — GIUSTIZIA È FATTA
+testo: Lo scompartimento di Marco Venturi è stato perquisito. Una pistola e una lettera sono state trovate.
+dialogo: LUCIA FERRARI: Una lettera. Alberti aveva una relazione con Roberta Fontana, la signora in rosso. Stava per lasciarla. Questo è il movente. Gelosia.
+testo: La signora in rosso, Roberta Fontana, viene arrestata.
+dialogo: LUCIA FERRARI: Roberta Fontana, lei è in arresto per l'omicidio di Giovanni Alberti.
+testo: Il caso è chiuso. Giustizia è fatta.
+
+[SCENA 6]
+titolo: FINE KO — CASO IRRISOLTO
+testo: Il treno è fermo alla stazione. La nebbia non si è ancora alzata. Le auto della polizia attendono, ma non c'è nessuno da arrestare.
+dialogo: LUCIA FERRARI: Abbiamo sbagliato. La donna che sospettavamo è scesa dal treno. Non abbiamo un colpevole.
+testo: Il caso è chiuso. Archiviato per mancanza di prove.
+
+[SCENA 7]
+titolo: FINE KO — L'INNOCENTE IN CUSTODIA
+testo: Andrea ha deciso di non credere a Venturi. La signora in rosso scende dal treno, nessuno la ferma.
+dialogo: LUCIA FERRARI: Venturi era innocente. Lo abbiamo capito troppo tardi. La signora in rosso è sparita.
+testo: Il caso è chiuso. Archiviato.
