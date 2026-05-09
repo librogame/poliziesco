@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Assassinio sul Treno - Lucia Ferrari</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #2c2c2c;
+            padding: 20px;
+            font-family: 'Georgia', 'Times New Roman', serif;
+        }
+        
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto 20px auto;
+            padding: 18mm 18mm;
+            background: white;
+            box-sizing: border-box;
+            position: relative;
+            border: 1px solid black;
+            font-size: 11pt;
+            line-height: 1.5;
+            color: black;
+            text-align: left;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .page {
+                margin: 0;
+                border: 1px solid black;
+                page-break-after: always;
+                background: white;
+            }
+            .no-print {
+                display: none;
+            }
+            .choice button {
+                display: none;
+            }
+            .choice {
+                border-left: 2px solid black;
+                padding-left: 8px;
+            }
+        }
+
+        .header {
+            margin-bottom: 25px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid black;
+            text-align: right;
+        }
+        
+        .scene-title {
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin: 28px 0 20px 0;
+            font-size: 14pt;
+            text-align: center;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-style: normal;
+        }
+        
+        .action {
+            margin: 12px 0;
+            color: #2a2a2a;
+            text-align: left;
+            font-style: italic;
+            font-size: 10.5pt;
+            font-family: 'Georgia', 'Times New Roman', serif;
+        }
+        
+        .dialogue {
+            margin: 12px 0 12px 20px;
+            text-align: left;
+            font-style: normal;
+        }
+        
+        .speaker {
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: black;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-style: normal;
+            font-size: 10.5pt;
+        }
+        
+        .pause {
+            margin: 16px 0;
+            text-align: center;
+            font-style: normal;
+        }
+        
+        .pause-dots {
+            font-size: 18pt;
+            letter-spacing: 8px;
+            color: #333;
+            font-weight: bold;
+        }
+        
+        .choices {
+            margin: 32px 0 20px 0;
+            padding: 18px;
+            background: white;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+        
+        .choices-title {
+            font-weight: bold;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 10pt;
+            color: #cc0000;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            text-align: center;
+        }
+        
+        .choice {
+            margin: 10px 0;
+            padding: 5px 0 5px 12px;
+            border-left: 2px solid #cc0000;
+        }
+        
+        .choice button {
+            background: none;
+            border: none;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-size: 10.5pt;
+            color: #cc0000;
+            cursor: pointer;
+            text-align: left;
+            padding: 0;
+            margin: 0;
+            font-weight: normal;
+            font-style: italic;
+        }
+        
+        .choice button:hover {
+            color: #ff3333;
+            text-decoration: underline;
+        }
+        
+        .default-choice {
+            margin-top: 14px;
+            padding-top: 8px;
+            border-top: 1px dashed #ccc;
+        }
+        
+        .default-choice button {
+            background: none;
+            border: none;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-size: 10.5pt;
+            color: #cc0000;
+            cursor: pointer;
+            text-align: left;
+            padding: 0;
+            margin: 0;
+            font-weight: normal;
+            font-style: italic;
+        }
+        
+        .default-choice button:hover {
+            color: #ff3333;
+            text-decoration: underline;
+        }
+        
+        .page-number {
+            position: absolute;
+            bottom: 15mm;
+            right: 18mm;
+            font-size: 9pt;
+            color: #999;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-style: italic;
+        }
+        
+        .cover {
+            text-align: center;
+            padding-top: 80px;
+        }
+        
+        .stamp {
+            font-size: 9pt;
+            letter-spacing: 4px;
+            border: 1px solid black;
+            display: inline-block;
+            padding: 4px 16px;
+            margin-bottom: 50px;
+            font-weight: normal;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-style: italic;
+        }
+        
+        .cover-title {
+            font-size: 28pt;
+            font-weight: bold;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            margin-top: 30px;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-style: normal;
+        }
+        
+        .cover-subtitle {
+            font-size: 12pt;
+            margin: 20px 0 40px 0;
+            letter-spacing: 2px;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-style: italic;
+        }
+        
+        .cover-line {
+            width: 80px;
+            margin: 30px auto;
+            border-top: 1px solid black;
+        }
+        
+        .cover-name {
+            font-size: 16pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 40px;
+            letter-spacing: 2px;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-style: normal;
+        }
+        
+        .cover-role {
+            font-size: 10pt;
+            margin-top: 8px;
+            color: #333;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-style: italic;
+        }
+        
+        .start-button {
+            display: inline-block;
+            margin-top: 50px;
+            padding: 12px 32px;
+            background: #cc0000;
+            color: white;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-size: 13pt;
+            font-weight: bold;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            cursor: pointer;
+            border: 1px solid #990000;
+        }
+        
+        .start-button:hover {
+            background: #ff1a1a;
+        }
+        
+        .no-print {
+            text-align: center;
+            margin-bottom: 25px;
+            position: sticky;
+            top: 10px;
+            z-index: 100;
+        }
+        
+        .no-print button {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-size: 11pt;
+            padding: 10px 24px;
+            background: black;
+            color: white;
+            border: 1px solid black;
+            cursor: pointer;
+            font-weight: normal;
+            letter-spacing: 1px;
+        }
+        
+        .no-print button:hover {
+            background: #333;
+        }
+        
+        @page {
+            size: A4;
+            margin: 0;
+        }
+        
+        .hidden-scene {
+            display: none;
+        }
+        
+        .error-message {
+            color: #cc0000;
+            text-align: center;
+            padding: 50px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+<div class="no-print">
+    <button id="musicToggleBtn" onclick="toggleMusic()">🔊 Musica on/off</button>
+</div>
+
+<!-- COPERTINA -->
+<div id="coverPage" class="page">
+    <div class="cover">
+        <div class="stamp">CASO N. 1</div>
+        <div class="cover-title">ASSASSINIO</div>
+        <div class="cover-title">SUL TRENO</div>
+        <div class="cover-line"></div>
+        <div class="cover-subtitle">libretto di</div>
+        <div class="cover-name">LUCIA FERRARI</div>
+        <div class="cover-role">Ispettore della polizia giudiziaria</div>
+        <div class="cover-line"></div>
+        <div class="start-button" onclick="startGame()">▶ INIZIA</div>
+    </div>
+    <div class="page-number">1</div>
+</div>
+
+<div id="sceneContainer"></div>
+
+<script>
+    let scenesData = {};
+    let scenesLoaded = false;
+    
+    let audioElement = null;
+    let isMusicPlaying = false;
+    let currentAudioFile = null;
+
+    function toggleMusic() {
+        const btn = document.getElementById('musicToggleBtn');
+        
+        if (isMusicPlaying) {
+            if (audioElement) {
+                audioElement.pause();
+            }
+            isMusicPlaying = false;
+            btn.innerHTML = '🔈 Musica off';
+        } else {
+            if (audioElement && currentAudioFile) {
+                audioElement.play().catch(e => console.log('Errore riproduzione:', e));
+            } else if (currentAudioFile) {
+                audioElement = new Audio(currentAudioFile);
+                audioElement.loop = true;
+                audioElement.play().catch(e => console.log('Errore riproduzione:', e));
+            }
+            isMusicPlaying = true;
+            btn.innerHTML = '🔊 Musica on';
+        }
+    }
+    
+    function playSceneMusic(sceneId) {
+        if (audioElement) {
+            audioElement.pause();
+        }
+        
+        const audioFile = `scena${sceneId}.mp3`;
+        currentAudioFile = audioFile;
+        audioElement = new Audio(audioFile);
+        audioElement.loop = true;
+        
+        if (isMusicPlaying) {
+            audioElement.play().catch(e => console.log('Audio non trovato:', audioFile));
+        }
+    }
+
+    async function loadScenes() {
+        try {
+            const response = await fetch('scene.txt');
+            if (!response.ok) throw new Error('File scene.txt non trovato');
+            const text = await response.text();
+            parseScenes(text);
+            scenesLoaded = true;
+            buildAllScenes();
+        } catch (error) {
+            document.getElementById('sceneContainer').innerHTML = '<div class="page"><div class="error-message">⚠️ Errore: file scene.txt non trovato.<br>Assicurati che sia nella stessa cartella di questo file HTML.</div></div>';
+            console.error(error);
+        }
+    }
+
+    function parseScenes(content) {
+        const lines = content.split('\n');
+        let currentScene = null;
+        
+        for (let line of lines) {
+            line = line.trim();
+            if (line === '') continue;
+            
+            if (line.startsWith('[SCENA ') && line.endsWith(']')) {
+                const match = line.match(/\[SCENA (\d+)\]/);
+                if (match) {
+                    currentScene = {
+                        id: parseInt(match[1]),
+                        title: '',
+                        content: [],
+                        choices: [],
+                        defaultScene: null
+                    };
+                    scenesData[currentScene.id] = currentScene;
+                }
+            }
+            else if (currentScene) {
+                if (line.startsWith('titolo:')) {
+                    currentScene.title = line.substring(7).trim();
+                }
+                else if (line.startsWith('testo:')) {
+                    currentScene.content.push({ type: 'action', text: line.substring(6).trim() });
+                }
+                else if (line.startsWith('dialogo:')) {
+                    let dialogText = line.substring(8).trim();
+                    const firstColon = dialogText.indexOf(':');
+                    if (firstColon !== -1) {
+                        const speaker = dialogText.substring(0, firstColon).trim();
+                        const text = dialogText.substring(firstColon + 1).trim();
+                        currentScene.content.push({ type: 'dialogue', speaker: speaker, text: text });
+                    } else {
+                        currentScene.content.push({ type: 'dialogue', speaker: '', text: dialogText });
+                    }
+                }
+                else if (line === '...') {
+                    currentScene.content.push({ type: 'pause' });
+                }
+                else if (line.startsWith('scelta:')) {
+                    const choiceText = line.substring(7).trim();
+                    const arrowIndex = choiceText.indexOf('→');
+                    if (arrowIndex !== -1) {
+                        const label = choiceText.substring(0, arrowIndex).trim();
+                        const target = parseInt(choiceText.substring(arrowIndex + 1).trim());
+                        currentScene.choices.push({ label: label, target: target });
+                    }
+                }
+                else if (line.startsWith('default:')) {
+                    currentScene.defaultScene = parseInt(line.substring(8).trim());
+                }
+            }
+        }
+    }
+
+    function buildAllScenes() {
+        const container = document.getElementById('sceneContainer');
+        container.innerHTML = '';
+        
+        for (let id in scenesData) {
+            const sceneDiv = createSceneDiv(scenesData[id]);
+            container.appendChild(sceneDiv);
+        }
+    }
+
+    function createSceneDiv(scene) {
+        const div = document.createElement('div');
+        div.className = 'page hidden-scene';
+        div.id = 'scena' + scene.id;
+        
+        const header = document.createElement('div');
+        header.className = 'header';
+        div.appendChild(header);
+        
+        const title = document.createElement('div');
+        title.className = 'scene-title';
+        title.textContent = scene.title;
+        div.appendChild(title);
+        
+        for (let item of scene.content) {
+            if (item.type === 'action') {
+                const p = document.createElement('div');
+                p.className = 'action';
+                p.textContent = item.text;
+                div.appendChild(p);
+            } else if (item.type === 'dialogue') {
+                const d = document.createElement('div');
+                d.className = 'dialogue';
+                if (item.speaker) {
+                    const speakerSpan = document.createElement('span');
+                    speakerSpan.className = 'speaker';
+                    speakerSpan.textContent = item.speaker + '.';
+                    d.appendChild(speakerSpan);
+                    d.appendChild(document.createTextNode(' "' + item.text + '"'));
+                } else {
+                    d.textContent = '"' + item.text + '"';
+                }
+                div.appendChild(d);
+            } else if (item.type === 'pause') {
+                const pauseDiv = document.createElement('div');
+                pauseDiv.className = 'pause';
+                const dotsSpan = document.createElement('span');
+                dotsSpan.className = 'pause-dots';
+                dotsSpan.textContent = '• • •';
+                pauseDiv.appendChild(dotsSpan);
+                div.appendChild(pauseDiv);
+            }
+        }
+        
+        if (scene.choices.length > 0) {
+            const choicesBox = document.createElement('div');
+            choicesBox.className = 'choices';
+            const choicesTitle = document.createElement('div');
+            choicesTitle.className = 'choices-title';
+            choicesTitle.textContent = 'decisione operativa';
+            choicesBox.appendChild(choicesTitle);
+            
+            for (let choice of scene.choices) {
+                const choiceDiv = document.createElement('div');
+                choiceDiv.className = 'choice';
+                const btn = document.createElement('button');
+                btn.textContent = choice.label + ' → SCENA ' + choice.target;
+                btn.onclick = () => showScene(choice.target);
+                choiceDiv.appendChild(btn);
+                choicesBox.appendChild(choiceDiv);
+            }
+            
+            if (scene.defaultScene) {
+                const defaultDiv = document.createElement('div');
+                defaultDiv.className = 'default-choice';
+                const defaultBtn = document.createElement('button');
+                defaultBtn.textContent = 'Tempo scaduto → SCENA ' + scene.defaultScene;
+                defaultBtn.onclick = () => showScene(scene.defaultScene);
+                defaultDiv.appendChild(defaultBtn);
+                choicesBox.appendChild(defaultDiv);
+            }
+            
+            div.appendChild(choicesBox);
+        }
+        
+        const pageNum = document.createElement('div');
+        pageNum.className = 'page-number';
+        pageNum.textContent = '— ' + (scene.id + 1) + ' —';
+        div.appendChild(pageNum);
+        
+        return div;
+    }
+
+    function showScene(sceneId) {
+        document.getElementById('coverPage').style.display = 'none';
+        
+        for (let id in scenesData) {
+            const scene = document.getElementById('scena' + id);
+            if (scene) scene.classList.add('hidden-scene');
+        }
+        
+        const targetScene = document.getElementById('scena' + sceneId);
+        if (targetScene) {
+            targetScene.classList.remove('hidden-scene');
+            targetScene.scrollIntoView({ behavior: 'smooth' });
+            playSceneMusic(sceneId);
+        } else {
+            alert('SCENA ' + sceneId + ' non trovata. Verifica il file scene.txt');
+        }
+    }
+
+    function startGame() {
+        if (scenesLoaded && scenesData[1]) {
+            showScene(1);
+        } else if (!scenesLoaded) {
+            alert('Caricamento scene in corso. Attendi qualche secondo...');
+            setTimeout(() => {
+                if (scenesData[1]) showScene(1);
+                else alert('Errore: scene non caricate. Verifica il file scene.txt');
+            }, 1000);
+        } else {
+            alert('Scena 1 non trovata nel file scene.txt');
+        }
+    }
+
+    window.showScene = showScene;
+    window.startGame = startGame;
+    window.toggleMusic = toggleMusic;
+    
+    loadScenes();
+</script>
+</body>
+</html>
